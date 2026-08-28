@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
+
+    /* =========================
+       CONTACT SECTION
+    ========================== */
+
     .contact-info {
       min-width: 0;
       width: 100%;
@@ -62,6 +67,10 @@
     .contact-email a:hover {
       text-decoration: underline;
     }
+
+    /* =========================
+       FOOTER
+    ========================== */
 
     .footer-contact {
       min-width: 0;
@@ -119,6 +128,168 @@
       font-size: 13px;
       line-height: 1.7;
       opacity: 0.75;
+    }
+
+
+    /* =========================
+       SOFTWARE ORDER SECTION
+    ========================== */
+
+    .software-order-section {
+      position: relative;
+    }
+
+    .order-box {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 45px;
+      padding: 40px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.16);
+      backdrop-filter: blur(10px);
+    }
+
+    .order-intro {
+      padding: 10px 0;
+    }
+
+    .order-icon {
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      font-size: 28px;
+      margin-bottom: 22px;
+    }
+
+    .order-intro h3 {
+      margin: 0 0 14px;
+      font-size: 26px;
+      line-height: 1.3;
+    }
+
+    .order-intro p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0.78;
+      max-width: 430px;
+    }
+
+    .order-points {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .order-points div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      opacity: 0.88;
+    }
+
+    .order-points span {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      font-size: 12px;
+    }
+
+    .software-order-form {
+      display: flex;
+      flex-direction: column;
+      gap: 17px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.045);
+      color: inherit;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.065);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+
+    .form-group select {
+      cursor: pointer;
+    }
+
+    .form-group select option {
+      color: #111;
+      background: #fff;
+    }
+
+    .order-submit-btn {
+      margin-top: 5px;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+      justify-content: center;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .order-box {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 30px;
+      }
+
     }
 
     @media (max-width: 768px) {
@@ -181,6 +352,15 @@
         max-width: 260px;
         text-align: center;
       }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .order-box {
+        padding: 25px;
+      }
+
     }
 
     @media (max-width: 480px) {
@@ -200,7 +380,24 @@
       .contact-address span {
         line-height: 1.8;
       }
+
+      .order-box {
+        padding: 20px;
+        border-radius: 18px;
+      }
+
+      .order-intro h3 {
+        font-size: 23px;
+      }
+
+      .order-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 25px;
+      }
+
     }
+
   </style>
 </head>
 
@@ -208,6 +405,11 @@
 
   <div class="page-glow page-glow-one"></div>
   <div class="page-glow page-glow-two"></div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
 
   <header class="site-header" id="top">
 
@@ -227,6 +429,7 @@
 
       </a>
 
+
       <button
         class="menu-toggle"
         aria-label="Open navigation"
@@ -237,6 +440,7 @@
         <span></span>
       </button>
 
+
       <nav class="nav-menu" aria-label="Main navigation">
 
         <a class="active" href="#home">Home</a>
@@ -244,6 +448,7 @@
         <a href="#solutions">Solutions</a>
         <a href="#services">Services</a>
         <a href="#work">Our Work</a>
+        <a href="#software-order">Software Order</a>
         <a href="#contact">Contact</a>
 
       </nav>
@@ -252,7 +457,13 @@
 
   </header>
 
+
   <main>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
 
     <section class="hero section" id="home">
 
@@ -275,6 +486,7 @@
             designed to make everyday business management easier.
           </p>
 
+
           <div class="hero-actions">
 
             <a class="btn btn-primary" href="#solutions">
@@ -282,11 +494,13 @@
               <span>→</span>
             </a>
 
-            <a class="btn btn-ghost" href="#contact">
-              Talk to M Tech
+            <a class="btn btn-ghost" href="#software-order">
+              Order Software
+              <span>→</span>
             </a>
 
           </div>
+
 
           <div class="hero-trust">
 
@@ -309,11 +523,13 @@
 
         </div>
 
+
         <div class="hero-visual reveal">
 
           <div class="visual-orbit"></div>
 
           <div class="visual-card visual-card-back"></div>
+
 
           <div class="visual-card main-visual">
 
@@ -332,6 +548,7 @@
 
             </div>
 
+
             <div class="visual-metrics">
 
               <div class="metric">
@@ -348,6 +565,7 @@
 
             </div>
 
+
             <div class="chart">
 
               <span style="height:34%"></span>
@@ -360,6 +578,7 @@
               <span style="height:91%"></span>
 
             </div>
+
 
             <div class="visual-bottom">
 
@@ -377,6 +596,7 @@
 
           </div>
 
+
           <div class="floating-badge badge-one">
             ⚡ Fast & Simple
           </div>
@@ -389,12 +609,18 @@
 
       </div>
 
+
       <div class="scroll-hint">
         Scroll to explore
         <span>↓</span>
       </div>
 
     </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
 
     <section class="section intro-section" id="about">
 
@@ -412,6 +638,7 @@
           </h2>
 
         </div>
+
 
         <div class="intro-copy reveal">
 
@@ -431,6 +658,11 @@
       </div>
 
     </section>
+
+
+    <!-- =========================
+         SOLUTIONS
+    ========================== -->
 
     <section class="section solutions-section" id="solutions">
 
@@ -454,7 +686,9 @@
 
         </div>
 
+
         <div class="solution-grid">
+
 
           <article class="solution-card featured reveal">
 
@@ -480,6 +714,7 @@
 
           </article>
 
+
           <article class="solution-card reveal">
 
             <div class="card-icon">⌘</div>
@@ -497,12 +732,13 @@
               requirements of your business.
             </p>
 
-            <a href="#contact">
-              Discuss a project
+            <a href="#software-order">
+              Order Software
               <span>→</span>
             </a>
 
           </article>
+
 
           <article class="solution-card reveal">
 
@@ -521,18 +757,24 @@
               phones, tablets and desktops.
             </p>
 
-            <a href="#contact">
-              Start a conversation
+            <a href="#software-order">
+              Order Software
               <span>→</span>
             </a>
 
           </article>
+
 
         </div>
 
       </div>
 
     </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================== -->
 
     <section class="section services-section" id="services">
 
@@ -551,7 +793,9 @@
 
         </div>
 
+
         <div class="service-grid">
+
 
           <article class="service-item reveal">
 
@@ -567,6 +811,7 @@
 
           </article>
 
+
           <article class="service-item reveal">
 
             <span>02</span>
@@ -580,6 +825,7 @@
             </div>
 
           </article>
+
 
           <article class="service-item reveal">
 
@@ -595,6 +841,7 @@
 
           </article>
 
+
           <article class="service-item reveal">
 
             <span>04</span>
@@ -609,11 +856,17 @@
 
           </article>
 
+
         </div>
 
       </div>
 
     </section>
+
+
+    <!-- =========================
+         OUR WORK
+    ========================== -->
 
     <section class="section work-section" id="work">
 
@@ -634,6 +887,7 @@
             practical business management, a polished interface and room for future expansion.
           </p>
 
+
           <div class="work-pills">
 
             <span>Products & Stock</span>
@@ -644,6 +898,7 @@
           </div>
 
         </div>
+
 
         <div class="work-art">
 
@@ -682,6 +937,335 @@
 
     </section>
 
+
+    <!-- =========================
+         SOFTWARE ORDER
+    ========================== -->
+
+    <section class="section software-order-section" id="software-order">
+
+      <div class="container">
+
+        <div class="section-heading centered reveal">
+
+          <span class="section-kicker">
+            SOFTWARE ORDER
+          </span>
+
+          <h2>
+            Need custom
+            <span>software?</span>
+          </h2>
+
+          <p>
+            Tell us about your requirements and our team will get in touch with you.
+          </p>
+
+        </div>
+
+
+        <div class="order-box reveal">
+
+
+          <div class="order-intro">
+
+            <div class="order-icon">
+              💻
+            </div>
+
+            <h3>
+              Order Software from M Tech
+            </h3>
+
+            <p>
+              আপনার ব্যবসার প্রয়োজন অনুযায়ী সফটওয়্যার তৈরি করতে
+              নিচের তথ্যগুলো আমাদের জানান।
+            </p>
+
+
+            <div class="order-points">
+
+              <div>
+                <span>✓</span>
+                Custom software solutions
+              </div>
+
+              <div>
+                <span>✓</span>
+                Business management systems
+              </div>
+
+              <div>
+                <span>✓</span>
+                Responsive web applications
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <form class="software-order-form" id="softwareOrderForm">
+
+
+            <div class="form-row">
+
+
+              <div class="form-group">
+
+                <label for="customerName">
+                  আপনার নাম *
+                </label>
+
+                <input
+                  type="text"
+                  id="customerName"
+                  name="customerName"
+                  placeholder="আপনার পূর্ণ নাম লিখুন"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="customerPhone">
+                  মোবাইল নম্বর *
+                </label>
+
+                <input
+                  type="tel"
+                  id="customerPhone"
+                  name="customerPhone"
+                  placeholder="01XXXXXXXXX"
+                  required
+                >
+
+              </div>
+
+
+            </div>
+
+
+            <div class="form-row">
+
+
+              <div class="form-group">
+
+                <label for="customerEmail">
+                  ইমেইল
+                </label>
+
+                <input
+                  type="email"
+                  id="customerEmail"
+                  name="customerEmail"
+                  placeholder="আপনার ইমেইল লিখুন"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="companyName">
+                  প্রতিষ্ঠান / ব্যবসার নাম *
+                </label>
+
+                <input
+                  type="text"
+                  id="companyName"
+                  name="companyName"
+                  placeholder="আপনার প্রতিষ্ঠানের নাম"
+                  required
+                >
+
+              </div>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="businessType">
+                ব্যবসার ধরন *
+              </label>
+
+              <select
+                id="businessType"
+                name="businessType"
+                required
+              >
+
+                <option value="">
+                  ব্যবসার ধরন নির্বাচন করুন
+                </option>
+
+                <option value="Retail">
+                  Retail Business
+                </option>
+
+                <option value="Wholesale">
+                  Wholesale Business
+                </option>
+
+                <option value="Manufacturing">
+                  Manufacturing
+                </option>
+
+                <option value="Service">
+                  Service Business
+                </option>
+
+                <option value="Restaurant">
+                  Restaurant / Food Business
+                </option>
+
+                <option value="Other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="softwareType">
+                কী ধরনের সফটওয়্যার প্রয়োজন? *
+              </label>
+
+              <input
+                type="text"
+                id="softwareType"
+                name="softwareType"
+                placeholder="যেমন: POS, Inventory, Business Management"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="requirements">
+                প্রয়োজনীয় ফিচারগুলো লিখুন *
+              </label>
+
+              <textarea
+                id="requirements"
+                name="requirements"
+                rows="5"
+                placeholder="আপনার সফটওয়্যারে কী কী ফিচার প্রয়োজন তা বিস্তারিত লিখুন..."
+                required
+              ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+
+              <div class="form-group">
+
+                <label for="budget">
+                  আনুমানিক বাজেট
+                </label>
+
+                <input
+                  type="text"
+                  id="budget"
+                  name="budget"
+                  placeholder="যেমন: ৳50,000"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="deliveryTime">
+                  কত দিনের মধ্যে চান?
+                </label>
+
+                <select
+                  id="deliveryTime"
+                  name="deliveryTime"
+                >
+
+                  <option value="">
+                    সময় নির্বাচন করুন
+                  </option>
+
+                  <option value="15 Days">
+                    15 Days
+                  </option>
+
+                  <option value="30 Days">
+                    30 Days
+                  </option>
+
+                  <option value="45 Days">
+                    45 Days
+                  </option>
+
+                  <option value="60 Days">
+                    60 Days
+                  </option>
+
+                  <option value="Flexible">
+                    Flexible
+                  </option>
+
+                </select>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="additionalInfo">
+                অতিরিক্ত তথ্য
+              </label>
+
+              <textarea
+                id="additionalInfo"
+                name="additionalInfo"
+                rows="4"
+                placeholder="অন্য কোনো তথ্য থাকলে লিখুন..."
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="btn btn-primary order-submit-btn"
+            >
+              Submit Software Order
+              <span>→</span>
+            </button>
+
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         WHY M TECH
+    ========================== -->
+
     <section class="section why-section">
 
       <div class="container">
@@ -700,7 +1284,9 @@
 
         </div>
 
+
         <div class="why-grid">
+
 
           <div class="why-card reveal">
 
@@ -716,6 +1302,7 @@
 
           </div>
 
+
           <div class="why-card reveal">
 
             <strong>02</strong>
@@ -729,6 +1316,7 @@
             </p>
 
           </div>
+
 
           <div class="why-card reveal">
 
@@ -744,11 +1332,17 @@
 
           </div>
 
+
         </div>
 
       </div>
 
     </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
 
     <section class="section cta-section" id="contact">
 
@@ -765,7 +1359,9 @@
             <span>Let's make it real.</span>
           </h2>
 
+
           <div class="contact-details">
+
 
             <div class="contact-person">
 
@@ -783,6 +1379,7 @@
 
             </div>
 
+
             <div class="contact-person">
 
               <strong>
@@ -799,6 +1396,7 @@
 
             </div>
 
+
             <div class="contact-email">
 
               <strong>
@@ -810,6 +1408,7 @@
               </a>
 
             </div>
+
 
             <div class="contact-address">
 
@@ -825,15 +1424,17 @@
 
             </div>
 
+
           </div>
 
         </div>
 
+
         <a
           class="btn btn-light"
-          href="mailto:mtechcompanybd@gmail.com"
+          href="#software-order"
         >
-          Contact M Tech
+          Order Software
           <span>→</span>
         </a>
 
@@ -843,13 +1444,18 @@
 
   </main>
 
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
   <footer class="site-footer">
 
     <div class="container footer-grid">
 
+
       <div class="footer-brand">
 
-        <!-- FIXED LOGO PATH -->
         <img
           src="mtech-logo.png"
           alt="M Tech Company BD"
@@ -861,6 +1467,7 @@
 
       </div>
 
+
       <div class="footer-links">
 
         <a href="#home">Home</a>
@@ -868,15 +1475,18 @@
         <a href="#solutions">Solutions</a>
         <a href="#services">Services</a>
         <a href="#work">Our Work</a>
+        <a href="#software-order">Software Order</a>
         <a href="#contact">Contact</a>
 
       </div>
+
 
       <div class="footer-contact">
 
         <h3>
           Contact
         </h3>
+
 
         <div class="footer-person">
 
@@ -894,6 +1504,7 @@
 
         </div>
 
+
         <div class="footer-person">
 
           <strong>
@@ -909,6 +1520,7 @@
           </a>
 
         </div>
+
 
         <div class="footer-email">
 
@@ -926,6 +1538,7 @@
 
     </div>
 
+
     <div class="container footer-address">
 
       <strong>
@@ -938,6 +1551,7 @@
       </span>
 
     </div>
+
 
     <div class="container footer-bottom">
 
@@ -954,6 +1568,7 @@
     </div>
 
   </footer>
+
 
   <script src="script.js"></script>
 
