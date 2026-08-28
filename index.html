@@ -18,7 +18,7 @@
   <style>
 
     /* =========================
-       CONTACT SECTION
+       CONTACT
     ========================== */
 
     .contact-info {
@@ -67,6 +67,7 @@
     .contact-email a:hover {
       text-decoration: underline;
     }
+
 
     /* =========================
        FOOTER
@@ -132,19 +133,64 @@
 
 
     /* =========================
-       SOFTWARE ORDER SECTION
+       SOFTWARE ORDER
     ========================== */
 
     .software-order-section {
       position: relative;
+      overflow: hidden;
+    }
+
+    .order-language {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .language-label {
+      opacity: 0.75;
+    }
+
+    .language-switch {
+      display: inline-flex;
+      padding: 4px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .language-btn {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .language-btn.active {
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
     }
 
     .order-box {
-      margin-top: 45px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 35px auto 0;
       display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
       gap: 45px;
       padding: 40px;
+      box-sizing: border-box;
       border-radius: 24px;
       background: rgba(255,255,255,0.035);
       border: 1px solid rgba(255,255,255,0.09);
@@ -153,6 +199,7 @@
     }
 
     .order-intro {
+      min-width: 0;
       padding: 10px 0;
     }
 
@@ -171,13 +218,13 @@
     .order-intro h3 {
       margin: 0 0 14px;
       font-size: 26px;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .order-intro p {
       margin: 0;
       font-size: 14px;
-      line-height: 1.8;
+      line-height: 1.9;
       opacity: 0.78;
       max-width: 430px;
     }
@@ -198,6 +245,7 @@
     }
 
     .order-points span {
+      flex: 0 0 24px;
       width: 24px;
       height: 24px;
       display: inline-flex;
@@ -208,7 +256,11 @@
       font-size: 12px;
     }
 
+
+    /* FORM */
+
     .software-order-form {
+      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: 17px;
@@ -216,11 +268,12 @@
 
     .form-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 17px;
     }
 
     .form-group {
+      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -235,6 +288,7 @@
     .form-group select,
     .form-group textarea {
       width: 100%;
+      max-width: 100%;
       box-sizing: border-box;
       padding: 13px 14px;
       border: 1px solid rgba(255,255,255,0.10);
@@ -244,7 +298,9 @@
       font-family: inherit;
       font-size: 13px;
       outline: none;
-      transition: border-color 0.2s ease, background 0.2s ease;
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
     }
 
     .form-group input:focus,
@@ -270,6 +326,7 @@
     }
 
     .order-submit-btn {
+      width: 100%;
       margin-top: 5px;
       border: 0;
       cursor: pointer;
@@ -279,18 +336,23 @@
 
 
     /* =========================
-       MOBILE
+       MOBILE ORDER FIX
     ========================== */
 
     @media (max-width: 900px) {
 
       .order-box {
         grid-template-columns: 1fr;
-        gap: 35px;
+        gap: 30px;
         padding: 30px;
       }
 
+      .order-intro p {
+        max-width: none;
+      }
+
     }
+
 
     @media (max-width: 768px) {
 
@@ -361,7 +423,12 @@
         padding: 25px;
       }
 
+      .order-intro h3 {
+        font-size: 24px;
+      }
+
     }
+
 
     @media (max-width: 480px) {
 
@@ -381,13 +448,18 @@
         line-height: 1.8;
       }
 
+      .order-language {
+        flex-direction: column;
+        gap: 7px;
+      }
+
       .order-box {
         padding: 20px;
         border-radius: 18px;
       }
 
       .order-intro h3 {
-        font-size: 23px;
+        font-size: 22px;
       }
 
       .order-icon {
@@ -401,15 +473,14 @@
   </style>
 </head>
 
+
 <body>
 
   <div class="page-glow page-glow-one"></div>
   <div class="page-glow page-glow-two"></div>
 
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- HEADER -->
 
   <header class="site-header" id="top">
 
@@ -461,9 +532,7 @@
   <main>
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
+    <!-- HERO -->
 
     <section class="hero section" id="home">
 
@@ -618,9 +687,7 @@
     </section>
 
 
-    <!-- =========================
-         ABOUT
-    ========================== -->
+    <!-- ABOUT -->
 
     <section class="section intro-section" id="about">
 
@@ -660,9 +727,7 @@
     </section>
 
 
-    <!-- =========================
-         SOLUTIONS
-    ========================== -->
+    <!-- SOLUTIONS -->
 
     <section class="section solutions-section" id="solutions">
 
@@ -772,9 +837,7 @@
     </section>
 
 
-    <!-- =========================
-         SERVICES
-    ========================== -->
+    <!-- SERVICES -->
 
     <section class="section services-section" id="services">
 
@@ -864,9 +927,7 @@
     </section>
 
 
-    <!-- =========================
-         OUR WORK
-    ========================== -->
+    <!-- OUR WORK -->
 
     <section class="section work-section" id="work">
 
@@ -946,20 +1007,52 @@
 
       <div class="container">
 
+
         <div class="section-heading centered reveal">
 
-          <span class="section-kicker">
+          <span class="section-kicker" id="orderKicker">
             SOFTWARE ORDER
           </span>
 
-          <h2>
+          <h2 id="orderTitle">
             Need custom
             <span>software?</span>
           </h2>
 
-          <p>
+          <p id="orderSubtitle">
             Tell us about your requirements and our team will get in touch with you.
           </p>
+
+        </div>
+
+
+        <!-- LANGUAGE SWITCH -->
+
+        <div class="order-language">
+
+          <span class="language-label" id="languageLabel">
+            Language:
+          </span>
+
+          <div class="language-switch">
+
+            <button
+              type="button"
+              class="language-btn active"
+              id="englishBtn"
+            >
+              English
+            </button>
+
+            <button
+              type="button"
+              class="language-btn"
+              id="banglaBtn"
+            >
+              বাংলা
+            </button>
+
+          </div>
 
         </div>
 
@@ -967,19 +1060,21 @@
         <div class="order-box reveal">
 
 
+          <!-- LEFT SIDE -->
+
           <div class="order-intro">
 
             <div class="order-icon">
               💻
             </div>
 
-            <h3>
+            <h3 id="introTitle">
               Order Software from M Tech
             </h3>
 
-            <p>
-              আপনার ব্যবসার প্রয়োজন অনুযায়ী সফটওয়্যার তৈরি করতে
-              নিচের তথ্যগুলো আমাদের জানান।
+            <p id="introText">
+              Tell us about your business and software requirements.
+              Our team will review your request and contact you.
             </p>
 
 
@@ -987,17 +1082,17 @@
 
               <div>
                 <span>✓</span>
-                Custom software solutions
+                <span id="pointOne">Custom software solutions</span>
               </div>
 
               <div>
                 <span>✓</span>
-                Business management systems
+                <span id="pointTwo">Business management systems</span>
               </div>
 
               <div>
                 <span>✓</span>
-                Responsive web applications
+                <span id="pointThree">Responsive web applications</span>
               </div>
 
             </div>
@@ -1005,23 +1100,30 @@
           </div>
 
 
-          <form class="software-order-form" id="softwareOrderForm">
+          <!-- RIGHT SIDE FORM -->
 
+          <form
+            class="software-order-form"
+            id="softwareOrderForm"
+          >
+
+
+            <!-- NAME + PHONE -->
 
             <div class="form-row">
 
 
               <div class="form-group">
 
-                <label for="customerName">
-                  আপনার নাম *
+                <label for="customerName" id="nameLabel">
+                  Your Name *
                 </label>
 
                 <input
                   type="text"
                   id="customerName"
                   name="customerName"
-                  placeholder="আপনার পূর্ণ নাম লিখুন"
+                  placeholder="Enter your full name"
                   required
                 >
 
@@ -1030,8 +1132,8 @@
 
               <div class="form-group">
 
-                <label for="customerPhone">
-                  মোবাইল নম্বর *
+                <label for="customerPhone" id="phoneLabel">
+                  Phone Number *
                 </label>
 
                 <input
@@ -1048,20 +1150,22 @@
             </div>
 
 
+            <!-- EMAIL + COMPANY -->
+
             <div class="form-row">
 
 
               <div class="form-group">
 
-                <label for="customerEmail">
-                  ইমেইল
+                <label for="customerEmail" id="emailLabel">
+                  Email
                 </label>
 
                 <input
                   type="email"
                   id="customerEmail"
                   name="customerEmail"
-                  placeholder="আপনার ইমেইল লিখুন"
+                  placeholder="Enter your email"
                 >
 
               </div>
@@ -1069,15 +1173,15 @@
 
               <div class="form-group">
 
-                <label for="companyName">
-                  প্রতিষ্ঠান / ব্যবসার নাম *
+                <label for="companyName" id="companyLabel">
+                  Company / Business Name *
                 </label>
 
                 <input
                   type="text"
                   id="companyName"
                   name="companyName"
-                  placeholder="আপনার প্রতিষ্ঠানের নাম"
+                  placeholder="Enter your company name"
                   required
                 >
 
@@ -1087,10 +1191,12 @@
             </div>
 
 
+            <!-- BUSINESS TYPE -->
+
             <div class="form-group">
 
-              <label for="businessType">
-                ব্যবসার ধরন *
+              <label for="businessType" id="businessTypeLabel">
+                Business Type *
               </label>
 
               <select
@@ -1099,31 +1205,31 @@
                 required
               >
 
-                <option value="">
-                  ব্যবসার ধরন নির্বাচন করুন
+                <option value="" id="businessTypeDefault">
+                  Select business type
                 </option>
 
-                <option value="Retail">
+                <option value="Retail" id="businessRetail">
                   Retail Business
                 </option>
 
-                <option value="Wholesale">
+                <option value="Wholesale" id="businessWholesale">
                   Wholesale Business
                 </option>
 
-                <option value="Manufacturing">
+                <option value="Manufacturing" id="businessManufacturing">
                   Manufacturing
                 </option>
 
-                <option value="Service">
+                <option value="Service" id="businessService">
                   Service Business
                 </option>
 
-                <option value="Restaurant">
+                <option value="Restaurant" id="businessRestaurant">
                   Restaurant / Food Business
                 </option>
 
-                <option value="Other">
+                <option value="Other" id="businessOther">
                   Other
                 </option>
 
@@ -1132,54 +1238,60 @@
             </div>
 
 
+            <!-- SOFTWARE TYPE -->
+
             <div class="form-group">
 
-              <label for="softwareType">
-                কী ধরনের সফটওয়্যার প্রয়োজন? *
+              <label for="softwareType" id="softwareTypeLabel">
+                What type of software do you need? *
               </label>
 
               <input
                 type="text"
                 id="softwareType"
                 name="softwareType"
-                placeholder="যেমন: POS, Inventory, Business Management"
+                placeholder="e.g. POS, Inventory, Business Management"
                 required
               >
 
             </div>
 
 
+            <!-- REQUIREMENTS -->
+
             <div class="form-group">
 
-              <label for="requirements">
-                প্রয়োজনীয় ফিচারগুলো লিখুন *
+              <label for="requirements" id="requirementsLabel">
+                Required Features *
               </label>
 
               <textarea
                 id="requirements"
                 name="requirements"
                 rows="5"
-                placeholder="আপনার সফটওয়্যারে কী কী ফিচার প্রয়োজন তা বিস্তারিত লিখুন..."
+                placeholder="Tell us what features you need..."
                 required
               ></textarea>
 
             </div>
 
 
+            <!-- BUDGET + TIME -->
+
             <div class="form-row">
 
 
               <div class="form-group">
 
-                <label for="budget">
-                  আনুমানিক বাজেট
+                <label for="budget" id="budgetLabel">
+                  Estimated Budget
                 </label>
 
                 <input
                   type="text"
                   id="budget"
                   name="budget"
-                  placeholder="যেমন: ৳50,000"
+                  placeholder="e.g. ৳50,000"
                 >
 
               </div>
@@ -1187,8 +1299,8 @@
 
               <div class="form-group">
 
-                <label for="deliveryTime">
-                  কত দিনের মধ্যে চান?
+                <label for="deliveryTime" id="deliveryLabel">
+                  When do you need it?
                 </label>
 
                 <select
@@ -1196,27 +1308,27 @@
                   name="deliveryTime"
                 >
 
-                  <option value="">
-                    সময় নির্বাচন করুন
+                  <option value="" id="deliveryDefault">
+                    Select time
                   </option>
 
-                  <option value="15 Days">
+                  <option value="15 Days" id="delivery15">
                     15 Days
                   </option>
 
-                  <option value="30 Days">
+                  <option value="30 Days" id="delivery30">
                     30 Days
                   </option>
 
-                  <option value="45 Days">
+                  <option value="45 Days" id="delivery45">
                     45 Days
                   </option>
 
-                  <option value="60 Days">
+                  <option value="60 Days" id="delivery60">
                     60 Days
                   </option>
 
-                  <option value="Flexible">
+                  <option value="Flexible" id="deliveryFlexible">
                     Flexible
                   </option>
 
@@ -1228,25 +1340,30 @@
             </div>
 
 
+            <!-- ADDITIONAL INFO -->
+
             <div class="form-group">
 
-              <label for="additionalInfo">
-                অতিরিক্ত তথ্য
+              <label for="additionalInfo" id="additionalLabel">
+                Additional Information
               </label>
 
               <textarea
                 id="additionalInfo"
                 name="additionalInfo"
                 rows="4"
-                placeholder="অন্য কোনো তথ্য থাকলে লিখুন..."
+                placeholder="Anything else you would like to tell us?"
               ></textarea>
 
             </div>
 
 
+            <!-- SUBMIT -->
+
             <button
               type="submit"
               class="btn btn-primary order-submit-btn"
+              id="submitOrderBtn"
             >
               Submit Software Order
               <span>→</span>
@@ -1262,9 +1379,7 @@
     </section>
 
 
-    <!-- =========================
-         WHY M TECH
-    ========================== -->
+    <!-- WHY M TECH -->
 
     <section class="section why-section">
 
@@ -1340,9 +1455,7 @@
     </section>
 
 
-    <!-- =========================
-         CONTACT
-    ========================== -->
+    <!-- CONTACT -->
 
     <section class="section cta-section" id="contact">
 
@@ -1445,9 +1558,7 @@
   </main>
 
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
+  <!-- FOOTER -->
 
   <footer class="site-footer">
 
@@ -1571,6 +1682,409 @@
 
 
   <script src="script.js"></script>
+
+
+  <!-- =========================
+       SOFTWARE ORDER LANGUAGE
+  ========================== -->
+
+  <script>
+
+    const englishBtn = document.getElementById("englishBtn");
+    const banglaBtn = document.getElementById("banglaBtn");
+
+    const orderKicker = document.getElementById("orderKicker");
+    const orderTitle = document.getElementById("orderTitle");
+    const orderSubtitle = document.getElementById("orderSubtitle");
+
+    const languageLabel = document.getElementById("languageLabel");
+
+    const introTitle = document.getElementById("introTitle");
+    const introText = document.getElementById("introText");
+
+    const pointOne = document.getElementById("pointOne");
+    const pointTwo = document.getElementById("pointTwo");
+    const pointThree = document.getElementById("pointThree");
+
+    const nameLabel = document.getElementById("nameLabel");
+    const phoneLabel = document.getElementById("phoneLabel");
+    const emailLabel = document.getElementById("emailLabel");
+    const companyLabel = document.getElementById("companyLabel");
+
+    const businessTypeLabel =
+      document.getElementById("businessTypeLabel");
+
+    const softwareTypeLabel =
+      document.getElementById("softwareTypeLabel");
+
+    const requirementsLabel =
+      document.getElementById("requirementsLabel");
+
+    const budgetLabel =
+      document.getElementById("budgetLabel");
+
+    const deliveryLabel =
+      document.getElementById("deliveryLabel");
+
+    const additionalLabel =
+      document.getElementById("additionalLabel");
+
+    const submitOrderBtn =
+      document.getElementById("submitOrderBtn");
+
+
+    const customerName =
+      document.getElementById("customerName");
+
+    const customerPhone =
+      document.getElementById("customerPhone");
+
+    const customerEmail =
+      document.getElementById("customerEmail");
+
+    const companyName =
+      document.getElementById("companyName");
+
+    const softwareType =
+      document.getElementById("softwareType");
+
+    const requirements =
+      document.getElementById("requirements");
+
+    const budget =
+      document.getElementById("budget");
+
+    const additionalInfo =
+      document.getElementById("additionalInfo");
+
+
+    const businessTypeDefault =
+      document.getElementById("businessTypeDefault");
+
+    const businessRetail =
+      document.getElementById("businessRetail");
+
+    const businessWholesale =
+      document.getElementById("businessWholesale");
+
+    const businessManufacturing =
+      document.getElementById("businessManufacturing");
+
+    const businessService =
+      document.getElementById("businessService");
+
+    const businessRestaurant =
+      document.getElementById("businessRestaurant");
+
+    const businessOther =
+      document.getElementById("businessOther");
+
+
+    const deliveryDefault =
+      document.getElementById("deliveryDefault");
+
+    const delivery15 =
+      document.getElementById("delivery15");
+
+    const delivery30 =
+      document.getElementById("delivery30");
+
+    const delivery45 =
+      document.getElementById("delivery45");
+
+    const delivery60 =
+      document.getElementById("delivery60");
+
+    const deliveryFlexible =
+      document.getElementById("deliveryFlexible");
+
+
+    function setLanguage(language) {
+
+      if (language === "bn") {
+
+        document.documentElement.lang = "bn";
+
+        orderKicker.textContent =
+          "সফটওয়্যার অর্ডার";
+
+        orderTitle.innerHTML =
+          "আপনার প্রয়োজনের <span>সফটওয়্যার?</span>";
+
+        orderSubtitle.textContent =
+          "আপনার প্রয়োজনীয়তা আমাদের জানান। আমাদের টিম আপনার সঙ্গে যোগাযোগ করবে।";
+
+        languageLabel.textContent =
+          "ভাষা:";
+
+        introTitle.textContent =
+          "M Tech থেকে সফটওয়্যার অর্ডার করুন";
+
+        introText.textContent =
+          "আপনার ব্যবসা ও সফটওয়্যারের প্রয়োজনীয়তা আমাদের জানান। আমাদের টিম আপনার অনুরোধ পর্যালোচনা করে আপনার সঙ্গে যোগাযোগ করবে।";
+
+        pointOne.textContent =
+          "কাস্টম সফটওয়্যার সমাধান";
+
+        pointTwo.textContent =
+          "ব্যবসা ব্যবস্থাপনা সিস্টেম";
+
+        pointThree.textContent =
+          "রেসপন্সিভ ওয়েব অ্যাপ্লিকেশন";
+
+        nameLabel.textContent =
+          "আপনার নাম *";
+
+        phoneLabel.textContent =
+          "মোবাইল নম্বর *";
+
+        emailLabel.textContent =
+          "ইমেইল";
+
+        companyLabel.textContent =
+          "প্রতিষ্ঠান / ব্যবসার নাম *";
+
+        businessTypeLabel.textContent =
+          "ব্যবসার ধরন *";
+
+        businessTypeDefault.textContent =
+          "ব্যবসার ধরন নির্বাচন করুন";
+
+        businessRetail.textContent =
+          "খুচরা ব্যবসা";
+
+        businessWholesale.textContent =
+          "পাইকারি ব্যবসা";
+
+        businessManufacturing.textContent =
+          "উৎপাদন ব্যবসা";
+
+        businessService.textContent =
+          "সেবা ব্যবসা";
+
+        businessRestaurant.textContent =
+          "রেস্টুরেন্ট / খাদ্য ব্যবসা";
+
+        businessOther.textContent =
+          "অন্যান্য";
+
+        softwareTypeLabel.textContent =
+          "কী ধরনের সফটওয়্যার প্রয়োজন? *";
+
+        requirementsLabel.textContent =
+          "প্রয়োজনীয় ফিচারগুলো লিখুন *";
+
+        budgetLabel.textContent =
+          "আনুমানিক বাজেট";
+
+        deliveryLabel.textContent =
+          "কত দিনের মধ্যে চান?";
+
+        deliveryDefault.textContent =
+          "সময় নির্বাচন করুন";
+
+        delivery15.textContent =
+          "১৫ দিন";
+
+        delivery30.textContent =
+          "৩০ দিন";
+
+        delivery45.textContent =
+          "৪৫ দিন";
+
+        delivery60.textContent =
+          "৬০ দিন";
+
+        deliveryFlexible.textContent =
+          "সময় নিয়ে নমনীয়";
+
+        additionalLabel.textContent =
+          "অতিরিক্ত তথ্য";
+
+        submitOrderBtn.innerHTML =
+          "অর্ডার পাঠান <span>→</span>";
+
+
+        customerName.placeholder =
+          "আপনার পূর্ণ নাম লিখুন";
+
+        customerPhone.placeholder =
+          "01XXXXXXXXX";
+
+        customerEmail.placeholder =
+          "আপনার ইমেইল লিখুন";
+
+        companyName.placeholder =
+          "আপনার প্রতিষ্ঠানের নাম";
+
+        softwareType.placeholder =
+          "যেমন: POS, Inventory, Business Management";
+
+        requirements.placeholder =
+          "আপনার সফটওয়্যারে কী কী ফিচার প্রয়োজন তা বিস্তারিত লিখুন...";
+
+        budget.placeholder =
+          "যেমন: ৳50,000";
+
+        additionalInfo.placeholder =
+          "অন্য কোনো তথ্য থাকলে লিখুন...";
+
+
+        banglaBtn.classList.add("active");
+        englishBtn.classList.remove("active");
+
+      } else {
+
+        document.documentElement.lang = "en";
+
+        orderKicker.textContent =
+          "SOFTWARE ORDER";
+
+        orderTitle.innerHTML =
+          "Need custom <span>software?</span>";
+
+        orderSubtitle.textContent =
+          "Tell us about your requirements and our team will get in touch with you.";
+
+        languageLabel.textContent =
+          "Language:";
+
+        introTitle.textContent =
+          "Order Software from M Tech";
+
+        introText.textContent =
+          "Tell us about your business and software requirements. Our team will review your request and contact you.";
+
+        pointOne.textContent =
+          "Custom software solutions";
+
+        pointTwo.textContent =
+          "Business management systems";
+
+        pointThree.textContent =
+          "Responsive web applications";
+
+        nameLabel.textContent =
+          "Your Name *";
+
+        phoneLabel.textContent =
+          "Phone Number *";
+
+        emailLabel.textContent =
+          "Email";
+
+        companyLabel.textContent =
+          "Company / Business Name *";
+
+        businessTypeLabel.textContent =
+          "Business Type *";
+
+        businessTypeDefault.textContent =
+          "Select business type";
+
+        businessRetail.textContent =
+          "Retail Business";
+
+        businessWholesale.textContent =
+          "Wholesale Business";
+
+        businessManufacturing.textContent =
+          "Manufacturing";
+
+        businessService.textContent =
+          "Service Business";
+
+        businessRestaurant.textContent =
+          "Restaurant / Food Business";
+
+        businessOther.textContent =
+          "Other";
+
+        softwareTypeLabel.textContent =
+          "What type of software do you need? *";
+
+        requirementsLabel.textContent =
+          "Required Features *";
+
+        budgetLabel.textContent =
+          "Estimated Budget";
+
+        deliveryLabel.textContent =
+          "When do you need it?";
+
+        deliveryDefault.textContent =
+          "Select time";
+
+        delivery15.textContent =
+          "15 Days";
+
+        delivery30.textContent =
+          "30 Days";
+
+        delivery45.textContent =
+          "45 Days";
+
+        delivery60.textContent =
+          "60 Days";
+
+        deliveryFlexible.textContent =
+          "Flexible";
+
+        additionalLabel.textContent =
+          "Additional Information";
+
+        submitOrderBtn.innerHTML =
+          "Submit Software Order <span>→</span>";
+
+
+        customerName.placeholder =
+          "Enter your full name";
+
+        customerPhone.placeholder =
+          "01XXXXXXXXX";
+
+        customerEmail.placeholder =
+          "Enter your email";
+
+        companyName.placeholder =
+          "Enter your company name";
+
+        softwareType.placeholder =
+          "e.g. POS, Inventory, Business Management";
+
+        requirements.placeholder =
+          "Tell us what features you need...";
+
+        budget.placeholder =
+          "e.g. ৳50,000";
+
+        additionalInfo.placeholder =
+          "Anything else you would like to tell us?";
+
+
+        englishBtn.classList.add("active");
+        banglaBtn.classList.remove("active");
+
+      }
+
+    }
+
+
+    englishBtn.addEventListener("click", function () {
+      setLanguage("en");
+    });
+
+
+    banglaBtn.addEventListener("click", function () {
+      setLanguage("bn");
+    });
+
+
+    /* Default language = English */
+
+    setLanguage("en");
+
+  </script>
 
 </body>
 </html>
