@@ -233,13 +233,20 @@
     }
 
     .order-points div {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      opacity: 0.88;
-    }
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.88;
+}
 
+.order-points div > span:last-child {
+  flex: 1;
+  min-width: 0;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
     .order-points span {
       flex: 0 0 24px;
       width: 24px;
