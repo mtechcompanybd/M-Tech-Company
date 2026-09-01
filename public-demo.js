@@ -1,0 +1,611 @@
+const companies = [
+  "RAK Ceramics",
+  "Akij Ceramic",
+  "Fress Ceramics",
+  "MIR Ceramic",
+  "G Wall",
+  "X Ceramics",
+  "Stella",
+  "Rosa",
+  "Cosmo",
+  "Marco Polo",
+  "Others Company"
+];
+
+const data = {
+  "RAK Ceramics": [
+    {
+      name: "RAK Marble White / RAK-102",
+      carton: 10,
+      piece: 4,
+      purchase: 65,
+      sale: 85,
+      stock: "120 Sqft",
+      remark: "Available"
+    },
+    {
+      name: "RAK Floor Grey / RAK-205",
+      carton: 8,
+      piece: 2,
+      purchase: 58,
+      sale: 75,
+      stock: "80 Sqft",
+      remark: "New"
+    }
+  ],
+
+  "Akij Ceramic": [
+    {
+      name: "Akij Floor Tile / AK-110",
+      carton: 12,
+      piece: 3,
+      purchase: 54,
+      sale: 72,
+      stock: "160 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "Fress Ceramics": [
+    {
+      name: "Fress Wall White / FR-21",
+      carton: 9,
+      piece: 2,
+      purchase: 48,
+      sale: 65,
+      stock: "90 Sqft",
+      remark: "Display"
+    }
+  ],
+
+  "MIR Ceramic": [
+    {
+      name: "MIR Classic / MR-17",
+      carton: 5,
+      piece: 2,
+      purchase: 59,
+      sale: 79,
+      stock: "55 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "G Wall": [
+    {
+      name: "G Wall Classic / GW-31",
+      carton: 7,
+      piece: 2,
+      purchase: 50,
+      sale: 68,
+      stock: "70 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "X Ceramics": [
+    {
+      name: "X Premium / XC-12",
+      carton: 6,
+      piece: 1,
+      purchase: 62,
+      sale: 82,
+      stock: "60 Sqft",
+      remark: "New"
+    }
+  ],
+
+  "Stella": [
+    {
+      name: "Stella Shine / ST-08",
+      carton: 6,
+      piece: 2,
+      purchase: 52,
+      sale: 70,
+      stock: "65 Sqft",
+      remark: "New"
+    }
+  ],
+
+  "Rosa": [
+    {
+      name: "Rosa White / RO-15",
+      carton: 7,
+      piece: 2,
+      purchase: 51,
+      sale: 69,
+      stock: "75 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "Cosmo": [
+    {
+      name: "Cosmo Gloss / CO-22",
+      carton: 5,
+      piece: 1,
+      purchase: 60,
+      sale: 81,
+      stock: "50 Sqft",
+      remark: "Display"
+    }
+  ],
+
+  "Marco Polo": [
+    {
+      name: "Marco Polo Premium / MP-07",
+      carton: 8,
+      piece: 2,
+      purchase: 64,
+      sale: 86,
+      stock: "95 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "Others Company": [
+    {
+      name: "Sample Product / OT-01",
+      carton: 4,
+      piece: 2,
+      purchase: 45,
+      sale: 62,
+      stock: "40 Box",
+      remark: "Demo"
+    }
+  ]
+};
+
+
+let selected = companies[0];
+
+const $ = (selector) => document.querySelector(selector);
+
+const money = (number) =>
+  "৳ " + Number(number || 0).toLocaleString("en-BD");
+
+
+/* =========================================================
+   FEATURE TAB NAVIGATION
+   ========================================================= */
+
+document.querySelectorAll(".nav-btn").forEach((button) => {
+
+  button.addEventListener("click", () => {
+
+    const targetId = button.dataset.target;
+
+    if (!targetId) return;
+
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach((btn) => btn.classList.remove("active"));
+
+    document
+      .querySelectorAll(".panel")
+      .forEach((panel) => panel.classList.remove("active"));
+
+    button.classList.add("active");
+
+    const targetPanel = document.getElementById(targetId);
+
+    if (targetPanel) {
+      targetPanel.classList.add("active");
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  });
+
+});
+
+
+/* =========================================================
+   PRODUCTS & STOCK
+   ========================================================= */
+
+function renderCompanies() {
+
+  const container = $("#companies");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  companies.forEach((company) => {
+
+    const button = document.createElement("button");
+
+    button.className =
+      "company" + (company === selected ? " active" : "");
+
+    button.textContent = company;
+
+    button.addEventListener("click", () => {
+
+      selected = company;
+
+      renderCompanies();
+      renderProducts();
+
+    });
+
+    container.appendChild(button);
+
+  });
+
+}
+
+
+function renderProducts() {
+
+  const title = $("#selectedCompany");
+  const body = $("#productRows");
+
+  if (!title || !body) return;
+
+  title.textContent = selected + " / Product List";
+
+  body.innerHTML = "";
+
+  const products = data[selected] || [];
+
+  products.forEach((product, index) => {
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${index + 1}</td>
+
+      <td>
+        <strong>${product.name}</strong>
+      </td>
+
+      <td>${product.carton || 0}</td>
+
+      <td>${product.piece || 0}</td>
+
+      <td>${money(product.purchase)}</td>
+
+      <td>${money(product.sale)}</td>
+
+      <td>${product.stock || ""}</td>
+
+      <td>${product.remark || ""}</td>
+
+      <td class="action">
+
+        <button
+          class="edit"
+          type="button">
+          Edit
+        </button>
+
+        <button
+          class="delete"
+          type="button">
+          Delete
+        </button>
+
+      </td>
+    `;
+
+
+    /* EDIT */
+
+    row
+      .querySelector(".edit")
+      .addEventListener("click", () => {
+
+        openProduct(index);
+
+      });
+
+
+    /* DELETE */
+
+    row
+      .querySelector(".delete")
+      .addEventListener("click", () => {
+
+        if (
+          confirm("Delete this demo product?")
+        ) {
+
+          data[selected].splice(index, 1);
+
+          renderProducts();
+
+        }
+
+      });
+
+
+    body.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   PRODUCT MODAL
+   ========================================================= */
+
+function openProduct(index = -1) {
+
+  const modal = $("#productModal");
+
+  if (!modal) return;
+
+
+  const product =
+    index < 0
+      ? {
+          name: "",
+          carton: "",
+          piece: "",
+          purchase: "",
+          sale: "",
+          stock: "",
+          remark: ""
+        }
+      : data[selected][index];
+
+
+  $("#editIndex").value = index;
+
+  $("#modalTitle").textContent =
+    index < 0
+      ? "Add Product / পণ্য যোগ"
+      : "Edit Product / পণ্য সম্পাদনা";
+
+
+  $("#pName").value =
+    product.name ?? "";
+
+  $("#pCarton").value =
+    product.carton ?? "";
+
+  $("#pPiece").value =
+    product.piece ?? "";
+
+  $("#pPurchase").value =
+    product.purchase ?? "";
+
+  $("#pSelling").value =
+    product.sale ?? "";
+
+  $("#pStock").value =
+    product.stock ?? "";
+
+  $("#pRemark").value =
+    product.remark ?? "";
+
+
+  modal.classList.add("show");
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT BUTTON
+   ========================================================= */
+
+const addProductButton = $("#addProduct");
+
+if (addProductButton) {
+
+  addProductButton.addEventListener(
+    "click",
+    () => openProduct()
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE PRODUCT MODAL
+   ========================================================= */
+
+const closeModalButton = $("#closeModal");
+
+if (closeModalButton) {
+
+  closeModalButton.addEventListener(
+    "click",
+    () => {
+
+      const modal = $("#productModal");
+
+      if (modal) {
+        modal.classList.remove("show");
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL BY CLICKING OUTSIDE
+   ========================================================= */
+
+const productModal = $("#productModal");
+
+if (productModal) {
+
+  productModal.addEventListener("click", (event) => {
+
+    if (event.target === productModal) {
+
+      productModal.classList.remove("show");
+
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   PRODUCT FORM
+   ========================================================= */
+
+const productForm = $("#productForm");
+
+if (productForm) {
+
+  productForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+
+    const index =
+      Number($("#editIndex").value);
+
+
+    const product = {
+
+      name:
+        $("#pName").value.trim(),
+
+      carton:
+        Number($("#pCarton").value) || 0,
+
+      piece:
+        Number($("#pPiece").value) || 0,
+
+      purchase:
+        Number($("#pPurchase").value) || 0,
+
+      sale:
+        Number($("#pSelling").value) || 0,
+
+      stock:
+        $("#pStock").value.trim(),
+
+      remark:
+        $("#pRemark").value.trim()
+
+    };
+
+
+    if (!product.name) {
+
+      alert(
+        "Please enter product name."
+      );
+
+      return;
+
+    }
+
+
+    /* ADD */
+
+    if (index < 0) {
+
+      data[selected].push(product);
+
+    }
+
+    /* EDIT */
+
+    else {
+
+      data[selected][index] = product;
+
+    }
+
+
+    $("#productModal")
+      .classList
+      .remove("show");
+
+
+    renderProducts();
+
+  });
+
+}
+
+
+/* =========================================================
+   ADD COMPANY
+   ========================================================= */
+
+const addCompanyButton = $("#addCompany");
+
+if (addCompanyButton) {
+
+  addCompanyButton.addEventListener(
+    "click",
+    () => {
+
+      const input =
+        $("#newCompanyName");
+
+      if (!input) return;
+
+
+      const name =
+        input.value.trim();
+
+
+      if (!name) {
+
+        alert(
+          "Please enter company name."
+        );
+
+        return;
+
+      }
+
+
+      if (companies.includes(name)) {
+
+        alert(
+          "This company already exists."
+        );
+
+        return;
+
+      }
+
+
+      companies.splice(
+        companies.length - 1,
+        0,
+        name
+      );
+
+
+      data[name] = [];
+
+
+      selected = name;
+
+      input.value = "";
+
+
+      renderCompanies();
+      renderProducts();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+   ========================================================= */
+
+renderCompanies();
+
+renderProducts();
