@@ -167,17 +167,16 @@ const money = (number) =>
 /* =========================================================
    FEATURE TAB NAVIGATION
    ========================================================= */
-
-document.querySelectorAll(".nav-btn").forEach((button) => {
+document.querySelectorAll(".tab").forEach((button) => {
 
   button.addEventListener("click", () => {
 
-    const targetId = button.dataset.target;
+    const targetId = button.dataset.section;
 
     if (!targetId) return;
 
     document
-      .querySelectorAll(".nav-btn")
+      .querySelectorAll(".tab")
       .forEach((btn) => btn.classList.remove("active"));
 
     document
