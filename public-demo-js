@@ -1,55 +1,610 @@
-const companies=["RAK Ceramics","Akij Ceramic","Fress Ceramics","MIR Ceramic","G Wall","X Ceramics","Stella","Rosa","Cosmo","Marco Polo","Others Company"];
-const data={
-"RAK Ceramics":[{name:"RAK Marble White / RAK-102",carton:10,piece:4,purchase:65,sale:85,stock:"120 Sqft",remark:"Available"},{name:"RAK Floor Grey / RAK-205",carton:8,piece:2,purchase:58,sale:75,stock:"80 Sqft",remark:"New"}],
-"Akij Ceramic":[{name:"Akij Floor Tile / AK-110",carton:12,piece:3,purchase:54,sale:72,stock:"160 Sqft",remark:"Available"}],
-"Fress Ceramics":[{name:"Fress Wall White / FR-21",carton:9,piece:2,purchase:48,sale:65,stock:"90 Sqft",remark:"Display"}],
-"MIR Ceramic":[{name:"MIR Classic / MR-17",carton:5,piece:2,purchase:59,sale:79,stock:"55 Sqft",remark:"Available"}],
-"G Wall":[{name:"G Wall Classic / GW-31",carton:7,piece:2,purchase:50,sale:68,stock:"70 Sqft",remark:"Available"}],
-"X Ceramics":[{name:"X Premium / XC-12",carton:6,piece:1,purchase:62,sale:82,stock:"60 Sqft",remark:"New"}],
-"Stella":[{name:"Stella Shine / ST-08",carton:6,piece:2,purchase:52,sale:70,stock:"65 Sqft",remark:"New"}],
-"Rosa":[{name:"Rosa White / RO-15",carton:7,piece:2,purchase:51,sale:69,stock:"75 Sqft",remark:"Available"}],
-"Cosmo":[{name:"Cosmo Gloss / CO-22",carton:5,piece:1,purchase:60,sale:81,stock:"50 Sqft",remark:"Display"}],
-"Marco Polo":[{name:"Marco Polo Premium / MP-07",carton:8,piece:2,purchase:64,sale:86,stock:"95 Sqft",remark:"Available"}],
-"Others Company":[{name:"Sample Product / OT-01",carton:4,piece:2,purchase:45,sale:62,stock:"40 Box",remark:"Demo"}]
+const companies = [
+  "RAK Ceramics",
+  "Akij Ceramic",
+  "Fress Ceramics",
+  "MIR Ceramic",
+  "G Wall",
+  "X Ceramics",
+  "Stella",
+  "Rosa",
+  "Cosmo",
+  "Marco Polo",
+  "Others Company"
+];
+
+const data = {
+  "RAK Ceramics": [
+    {
+      name: "RAK Marble White / RAK-102",
+      carton: 10,
+      piece: 4,
+      purchase: 65,
+      sale: 85,
+      stock: "120 Sqft",
+      remark: "Available"
+    },
+    {
+      name: "RAK Floor Grey / RAK-205",
+      carton: 8,
+      piece: 2,
+      purchase: 58,
+      sale: 75,
+      stock: "80 Sqft",
+      remark: "New"
+    }
+  ],
+
+  "Akij Ceramic": [
+    {
+      name: "Akij Floor Tile / AK-110",
+      carton: 12,
+      piece: 3,
+      purchase: 54,
+      sale: 72,
+      stock: "160 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "Fress Ceramics": [
+    {
+      name: "Fress Wall White / FR-21",
+      carton: 9,
+      piece: 2,
+      purchase: 48,
+      sale: 65,
+      stock: "90 Sqft",
+      remark: "Display"
+    }
+  ],
+
+  "MIR Ceramic": [
+    {
+      name: "MIR Classic / MR-17",
+      carton: 5,
+      piece: 2,
+      purchase: 59,
+      sale: 79,
+      stock: "55 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "G Wall": [
+    {
+      name: "G Wall Classic / GW-31",
+      carton: 7,
+      piece: 2,
+      purchase: 50,
+      sale: 68,
+      stock: "70 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "X Ceramics": [
+    {
+      name: "X Premium / XC-12",
+      carton: 6,
+      piece: 1,
+      purchase: 62,
+      sale: 82,
+      stock: "60 Sqft",
+      remark: "New"
+    }
+  ],
+
+  "Stella": [
+    {
+      name: "Stella Shine / ST-08",
+      carton: 6,
+      piece: 2,
+      purchase: 52,
+      sale: 70,
+      stock: "65 Sqft",
+      remark: "New"
+    }
+  ],
+
+  "Rosa": [
+    {
+      name: "Rosa White / RO-15",
+      carton: 7,
+      piece: 2,
+      purchase: 51,
+      sale: 69,
+      stock: "75 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "Cosmo": [
+    {
+      name: "Cosmo Gloss / CO-22",
+      carton: 5,
+      piece: 1,
+      purchase: 60,
+      sale: 81,
+      stock: "50 Sqft",
+      remark: "Display"
+    }
+  ],
+
+  "Marco Polo": [
+    {
+      name: "Marco Polo Premium / MP-07",
+      carton: 8,
+      piece: 2,
+      purchase: 64,
+      sale: 86,
+      stock: "95 Sqft",
+      remark: "Available"
+    }
+  ],
+
+  "Others Company": [
+    {
+      name: "Sample Product / OT-01",
+      carton: 4,
+      piece: 2,
+      purchase: 45,
+      sale: 62,
+      stock: "40 Box",
+      remark: "Demo"
+    }
+  ]
 };
-let selected=companies[0], dueOnly=false;
-const $=s=>document.querySelector(s);
-const money=n=>"৳ "+Number(n||0).toLocaleString("en-BD");
 
-function renderCompanies(){const g=$("#companyGrid");g.innerHTML="";companies.forEach(c=>{const b=document.createElement("button");b.className="company"+(c===selected?" active":"");b.textContent=c;b.onclick=()=>{selected=c;renderCompanies();renderProducts()};g.appendChild(b)})}
-function renderProducts(){
-  $("#selectedCompanyTitle").textContent=selected+" / Product List";
-  const body=$("#productBody");body.innerHTML="";
-  (data[selected]||[]).forEach((p,i)=>{const tr=document.createElement("tr");tr.innerHTML=`<td>${i+1}</td><td><strong>${p.name}</strong></td><td>${p.carton||0}</td><td>${p.piece||0}</td><td>${money(p.purchase)}</td><td>${money(p.sale)}</td><td>${p.stock}</td><td>${p.remark||""}</td><td class="action"><button class="edit" onclick="editProduct(${i})">Edit</button><button class="delete" onclick="deleteProduct(${i})">Delete</button></td>`;body.appendChild(tr)})
+let selected = companies[0];
+
+const $ = (selector) => document.querySelector(selector);
+
+const money = (number) => {
+  return "৳ " + Number(number || 0).toLocaleString("en-BD");
+};
+
+
+/* =========================================
+   MAIN DEMO NAVIGATION
+========================================= */
+
+document.querySelectorAll(".nav-btn").forEach((button) => {
+
+  button.addEventListener("click", () => {
+
+    const targetId = button.dataset.target;
+
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach((btn) => btn.classList.remove("active"));
+
+    document
+      .querySelectorAll(".panel")
+      .forEach((panel) => panel.classList.remove("active"));
+
+    button.classList.add("active");
+
+    target.classList.add("active");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  });
+
+});
+
+
+/* =========================================
+   PRODUCTS & STOCK
+========================================= */
+
+function renderCompanies() {
+
+  const grid = $("#companies");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  companies.forEach((company) => {
+
+    const button = document.createElement("button");
+
+    button.className =
+      "company" + (company === selected ? " active" : "");
+
+    button.textContent = company;
+
+    button.addEventListener("click", () => {
+
+      selected = company;
+
+      renderCompanies();
+
+      renderProducts();
+
+    });
+
+    grid.appendChild(button);
+
+  });
+
 }
-function openProduct(i=-1){$("#modal").classList.add("show");$("#editIndex").value=i;$("#modalTitle").textContent=i<0?"Add Product / পণ্য যোগ":"Edit Product / পণ্য সম্পাদনা";const p=i<0?{name:"",carton:"",piece:"",purchase:"",sale:"",stock:"",remark:""}:data[selected][i];["pName","pCarton","pPiece","pPurchase","pSale","pStock","pRemark"].forEach((id,j)=>$("#"+id).value=[p.name,p.carton,p.piece,p.purchase,p.sale,p.stock,p.remark][j]??"")}
-window.editProduct=i=>openProduct(i);
-window.deleteProduct=i=>{if(confirm("Delete this demo product?")){data[selected].splice(i,1);renderProducts()}};
-$("#addProductBtn").onclick=()=>openProduct();
-$("#closeModal").onclick=()=>$("#modal").classList.remove("show");
-$("#productForm").onsubmit=e=>{e.preventDefault();const i=Number($("#editIndex").value);const p={name:$("#pName").value.trim(),carton:Number($("#pCarton").value)||0,piece:Number($("#pPiece").value)||0,purchase:Number($("#pPurchase").value)||0,sale:Number($("#pSale").value)||0,stock:$("#pStock").value.trim(),remark:$("#pRemark").value.trim()};if(i<0)data[selected].push(p);else data[selected][i]=p;$("#modal").classList.remove("show");renderProducts()};
 
-$("#addCompanyBtn").onclick=()=>$("#companyModal").classList.add("show");
-$("#closeCompanyModal").onclick=()=>$("#companyModal").classList.remove("show");
-$("#companyForm").onsubmit=e=>{e.preventDefault();const n=$("#companyName").value.trim();if(n&&!companies.includes(n)){companies.splice(companies.length-1,0,n);data[n]=[];selected=n;renderCompanies();renderProducts()}$("#companyName").value="";$("#companyModal").classList.remove("show")};
 
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#"+b.dataset.section).classList.add("active");window.scrollTo({top:0,behavior:"smooth"})});
+/* =========================================
+   PRODUCT TABLE
+========================================= */
 
-function addInvoiceRow(name="RAK Marble White",qty=10,price=85){const body=$("#invoiceBody"),tr=document.createElement("tr"),n=body.children.length+1;tr.innerHTML=`<td>${n}</td><td><input class="rowName" value="${name}"></td><td><input class="rowQty" type="number" value="${qty}" min="0"></td><td><input class="rowPrice" type="number" value="${price}" min="0"></td><td class="rowTotal">${money(qty*price)}</td>`;body.appendChild(tr);tr.querySelectorAll("input").forEach(i=>i.addEventListener("input",updateInvoiceTotal));updateInvoiceTotal()}
-function updateInvoiceTotal(){let total=0;document.querySelectorAll("#invoiceBody tr").forEach(tr=>{const q=Number(tr.querySelector(".rowQty").value)||0,p=Number(tr.querySelector(".rowPrice").value)||0;tr.querySelector(".rowTotal").textContent=money(q*p);total+=q*p});$("#grandTotal").textContent=money(total)}
-$("#addInvoiceRow").onclick=()=>addInvoiceRow("New Product",1,100);
-$("#newInvoiceBtn").onclick=()=>{$("#invoiceNo").textContent="INV-"+(1008+Math.floor(Math.random()*90));$("#invoiceBody").innerHTML="";addInvoiceRow();addInvoiceRow("RAK Floor Grey",5,75);alert("New demo invoice created. You can edit product, quantity and price.")};
+function renderProducts() {
 
-// Due / Collection demo: simulate a collection without touching real data.
-document.querySelectorAll(".collectBtn").forEach(b=>b.onclick=()=>{const row=b.closest("tr");const dueCell=row.querySelector(".danger");const current=dueCell?dueCell.textContent:"৳0";const amount=prompt("Collection amount / আদায়ের পরিমাণ লিখুন",current.replace(/[^0-9]/g,""));if(amount!==null&&!isNaN(Number(amount))){const n=Number(amount);if(n>0){if(dueCell)dueCell.textContent=money(Math.max(0,Number(current.replace(/[^0-9]/g,""))-n));b.textContent="Collected ✓";b.disabled=true;alert("Demo collection recorded: "+money(n)+". Real Firebase data is not changed.")}}});
+  const title = $("#selectedCompany");
 
-// Reports / Accounts print demonstrations.
-$("#printReport").onclick=()=>window.print();
-$("#printAccounts").onclick=()=>window.print();
+  const body = $("#productRows");
 
-// Sales history filter.
-$("#historyFilterBtn").onclick=()=>{dueOnly=!dueOnly;$("#historyFilterBtn").textContent=dueOnly?"🔎 Show All":"🔎 Show Due Only";document.querySelectorAll("#history tbody tr").forEach(tr=>{tr.style.display=dueOnly?(tr.querySelector(".pill.due")?"":"none"):""})};
+  if (!title || !body) return;
 
-$("#invDate").value=new Date().toISOString().slice(0,10);
-addInvoiceRow();addInvoiceRow("RAK Floor Grey",5,75);
-renderCompanies();renderProducts();
+  title.textContent = selected;
+
+  body.innerHTML = "";
+
+  const products = data[selected] || [];
+
+  products.forEach((product, index) => {
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${index + 1}</td>
+
+      <td>
+        <strong>${product.name}</strong>
+      </td>
+
+      <td>${product.carton || 0}</td>
+
+      <td>${product.piece || 0}</td>
+
+      <td>${money(product.purchase)}</td>
+
+      <td>${money(product.sale)}</td>
+
+      <td>${product.stock || ""}</td>
+
+      <td>${product.remark || ""}</td>
+
+      <td class="action">
+
+        <button class="edit">
+          Edit
+        </button>
+
+        <button class="delete">
+          Delete
+        </button>
+
+      </td>
+    `;
+
+
+    /* EDIT */
+
+    row
+      .querySelector(".edit")
+      .addEventListener("click", () => {
+
+        openProduct(index);
+
+      });
+
+
+    /* DELETE */
+
+    row
+      .querySelector(".delete")
+      .addEventListener("click", () => {
+
+        if (
+          confirm("Delete this demo product?")
+        ) {
+
+          data[selected].splice(index, 1);
+
+          renderProducts();
+
+        }
+
+      });
+
+
+    body.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================
+   PRODUCT MODAL
+========================================= */
+
+function openProduct(index = -1) {
+
+  const modal = $("#productModal");
+
+  if (!modal) return;
+
+
+  const product =
+    index < 0
+      ? {
+          name: "",
+          carton: "",
+          piece: "",
+          purchase: "",
+          sale: "",
+          stock: "",
+          remark: ""
+        }
+      : data[selected][index];
+
+
+  $("#editIndex").value = index;
+
+
+  $("#modalTitle").textContent =
+    index < 0
+      ? "Add Product / পণ্য যোগ"
+      : "Edit Product / পণ্য সম্পাদনা";
+
+
+  $("#pName").value =
+    product.name ?? "";
+
+  $("#pCarton").value =
+    product.carton ?? "";
+
+  $("#pPiece").value =
+    product.piece ?? "";
+
+  $("#pPurchase").value =
+    product.purchase ?? "";
+
+  $("#pSelling").value =
+    product.sale ?? "";
+
+  $("#pStock").value =
+    product.stock ?? "";
+
+  $("#pRemark").value =
+    product.remark ?? "";
+
+
+  modal.classList.add("show");
+
+}
+
+
+/* =========================================
+   ADD PRODUCT BUTTON
+========================================= */
+
+const addProduct = $("#addProduct");
+
+if (addProduct) {
+
+  addProduct.addEventListener(
+    "click",
+    () => openProduct()
+  );
+
+}
+
+
+/* =========================================
+   CLOSE MODAL
+========================================= */
+
+const closeModal = $("#closeModal");
+
+if (closeModal) {
+
+  closeModal.addEventListener(
+    "click",
+    () => {
+
+      $("#productModal")
+        .classList
+        .remove("show");
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE MODAL
+========================================= */
+
+const productModal = $("#productModal");
+
+if (productModal) {
+
+  productModal.addEventListener(
+    "click",
+    (event) => {
+
+      if (event.target === productModal) {
+
+        productModal
+          .classList
+          .remove("show");
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   SAVE / UPDATE PRODUCT
+========================================= */
+
+const productForm = $("#productForm");
+
+if (productForm) {
+
+  productForm.addEventListener(
+    "submit",
+    (event) => {
+
+      event.preventDefault();
+
+
+      const index =
+        Number($("#editIndex").value);
+
+
+      const product = {
+
+        name:
+          $("#pName")
+            .value
+            .trim(),
+
+        carton:
+          Number($("#pCarton").value) || 0,
+
+        piece:
+          Number($("#pPiece").value) || 0,
+
+        purchase:
+          Number($("#pPurchase").value) || 0,
+
+        sale:
+          Number($("#pSelling").value) || 0,
+
+        stock:
+          $("#pStock")
+            .value
+            .trim(),
+
+        remark:
+          $("#pRemark")
+            .value
+            .trim()
+
+      };
+
+
+      if (!product.name) return;
+
+
+      /* NEW PRODUCT */
+
+      if (index < 0) {
+
+        data[selected].push(product);
+
+      }
+
+
+      /* UPDATE PRODUCT */
+
+      else {
+
+        data[selected][index] =
+          product;
+
+      }
+
+
+      $("#productModal")
+        .classList
+        .remove("show");
+
+
+      renderProducts();
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   ADD COMPANY
+========================================= */
+
+const addCompany = $("#addCompany");
+
+if (addCompany) {
+
+  addCompany.addEventListener(
+    "click",
+    () => {
+
+      const input =
+        $("#newCompanyName");
+
+      const name =
+        input
+          ? input.value.trim()
+          : "";
+
+
+      if (!name) return;
+
+
+      if (companies.includes(name)) {
+
+        alert(
+          "This company already exists."
+        );
+
+        return;
+
+      }
+
+
+      companies.splice(
+        companies.length - 1,
+        0,
+        name
+      );
+
+
+      data[name] = [];
+
+      selected = name;
+
+
+      input.value = "";
+
+
+      renderCompanies();
+
+      renderProducts();
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+renderCompanies();
+
+renderProducts();
