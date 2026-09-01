@@ -207,8 +207,7 @@ document.querySelectorAll(".tab").forEach((button) => {
 
 function renderCompanies() {
 
-  const container = $("#companies");
-
+  const container = $("#companyGrid");
   if (!container) return;
 
   container.innerHTML = "";
@@ -240,8 +239,8 @@ function renderCompanies() {
 
 function renderProducts() {
 
-  const title = $("#selectedCompany");
-  const body = $("#productRows");
+  const title = $("#selectedCompanyTitle");
+  const body = $("#productBody");
 
   if (!title || !body) return;
 
