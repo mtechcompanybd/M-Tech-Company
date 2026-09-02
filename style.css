@@ -1037,8 +1037,10 @@ h2 span{
   }
 
   .hero-copy{
-    text-align:center
-  }
+  text-align:center;
+  grid-column:auto;
+  grid-row:auto;
+}
 
   .eyebrow{
     font-size:9px
@@ -1072,9 +1074,11 @@ h2 span{
   }
 
   .hero-visual{
-    height:390px;
-    margin-top:5px
-  }
+  height:390px;
+  margin-top:5px;
+  grid-column:auto;
+  grid-row:auto;
+}
 
   .visual-orbit{
     width:320px;
