@@ -848,7 +848,108 @@
   </div>
 
 </div>
+<!-- COLLECTION MODAL -->
 
+<div class="modal" id="collectionModal">
+
+  <div class="modal-box small">
+
+    <div class="modal-head">
+
+      <h3>
+        Collect Payment / টাকা আদায়
+      </h3>
+
+      <button id="closeCollectionModal">
+        &times;
+      </button>
+
+    </div>
+
+    <form id="collectionForm">
+
+      <label>
+        Invoice
+        <input
+          id="collectionInvoice"
+          readonly>
+      </label>
+
+      <label>
+        Customer
+        <input
+          id="collectionCustomer"
+          readonly>
+      </label>
+
+      <label>
+        Current Due
+        <input
+          id="collectionCurrentDue"
+          readonly>
+      </label>
+
+      <label>
+        Collection Amount / আদায়ের পরিমাণ
+        <input
+          id="collectionAmount"
+          type="number"
+          min="0"
+          required>
+      </label>
+
+      <label>
+        Payment Method / পেমেন্ট মাধ্যম
+
+        <select id="collectionMethod">
+
+          <option>
+            Cash / নগদ
+          </option>
+
+          <option>
+            Bank / ব্যাংক
+          </option>
+
+          <option>
+            bKash
+          </option>
+
+          <option>
+            Nagad
+          </option>
+
+        </select>
+
+      </label>
+
+      <label>
+        Collection Date / আদায়ের তারিখ
+        <input
+          id="collectionDate"
+          type="date">
+      </label>
+
+      <label>
+        Note / মন্তব্য
+        <input
+          id="collectionNote"
+          placeholder="Optional">
+      </label>
+
+      <button
+        class="primary wide"
+        type="submit">
+
+        Save Collection
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
 
 <script src="public-demo.js"></script>
 
