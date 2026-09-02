@@ -293,16 +293,69 @@
 
     <div class="invoice-actions">
 
-      <button class="secondary" id="addInvoiceRow">
-        ＋ Add Item
-      </button>
+  <button class="secondary" id="addInvoiceRow">
+    ＋ Add Item
+  </button>
 
-      <div>
-        <span>Grand Total</span>
-        <strong id="grandTotal">৳ 0</strong>
-      </div>
+  <div class="invoice-grand">
+    <span>Grand Total</span>
+    <strong id="grandTotal">৳ 0</strong>
+  </div>
 
-    </div>
+</div>
+
+<div class="invoice-summary">
+
+  <div class="summary-row">
+    <span>Labour Charge / শ্রমিক চার্জ</span>
+
+    <label class="summary-input">
+      <span>৳</span>
+      <input
+        id="labourCharge"
+        type="number"
+        min="0"
+        value="0">
+    </label>
+  </div>
+
+  <div class="summary-row">
+    <span>Discount / ছাড়</span>
+
+    <label class="summary-input">
+      <span>৳</span>
+      <input
+        id="discount"
+        type="number"
+        min="0"
+        value="0">
+    </label>
+  </div>
+
+  <div class="summary-row payable">
+    <span>Payable Bill / পরিশোধযোগ্য বিল</span>
+    <strong id="payableBill">৳ 0</strong>
+  </div>
+
+  <div class="summary-row">
+    <span>Paid Bill / পরিশোধিত বিল</span>
+
+    <label class="summary-input">
+      <span>৳</span>
+      <input
+        id="paidBill"
+        type="number"
+        min="0"
+        value="0">
+    </label>
+  </div>
+
+  <div class="summary-row due-row">
+    <span>Due / বকেয়া</span>
+    <strong id="invoiceDue">৳ 0</strong>
+  </div>
+
+</div>
 
 
     <div class="demo-note">
