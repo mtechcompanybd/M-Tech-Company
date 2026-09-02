@@ -964,7 +964,7 @@ h2 span{
    MOBILE
 ================================ */
 
-@media(max-width:720px){
+@media (max-width:600px){
 
   .container{
     width:min(100% - 28px,560px)
