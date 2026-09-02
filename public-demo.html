@@ -1,14 +1,785 @@
-<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MTC Enterprise System | Public Demo</title><link rel="stylesheet" href="public-demo.css"></head><body>
-<header class="topbar"><div class="brand"><div class="brand-mark">M</div><div><strong>MTC Enterprise System</strong><small>Public Demo / পাবলিক ডেমো</small></div></div><span class="badge">PUBLIC DEMO</span></header>
-<main class="container"><section class="hero"><div><span class="eyebrow">MTC ENTERPRISE SYSTEM</span><h1>Public Demo <span>Experience</span></h1><p>Demo data দিয়ে Software-এর প্রতিটি গুরুত্বপূর্ণ অংশ দেখা ও ব্যবহার করে বোঝা যাবে। এটি কোনো বাস্তব ব্যবসার তথ্য নয়।</p></div><span class="sample">Sample Data</span></section>
-<nav class="tabs"><button class="tab active" data-section="dashboard">📊 Dashboard Demo</button><button class="tab" data-section="products">📦 Products &amp; Stock Demo</button><button class="tab" data-section="invoice">🧾 Sales Invoice Demo</button><button class="tab" data-section="history">📋 Sales History Demo</button><button class="tab" data-section="collection">💰 Due / Collection Demo</button><button class="tab" data-section="reports">📈 Sales Reports Demo</button><button class="tab" data-section="accounts">💼 Accounts Demo</button></nav>
-<section id="dashboard" class="panel active"><div class="section-head"><div><span class="eyebrow">DASHBOARD DEMO</span><h2>Business Overview / ব্যবসার সারসংক্ষেপ</h2></div><span class="chip">Live Demo UI</span></div><div class="stats"><article class="stat blue"><small>This Month's Sales</small><strong>৳ 8,75,000</strong><em>18,450 Sqft</em></article><article class="stat purple"><small>Total Stock</small><strong>42,680</strong><em>Sqft / Piece / Box</em></article><article class="stat green"><small>Total Stock Value</small><strong>৳ 18,40,000</strong><em>Purchase Value</em></article><article class="stat orange"><small>Total Due</small><strong>৳ 2,35,500</strong><em>Customer Due</em></article></div><div class="card"><div class="card-title"><div><h3>Daily Sales / প্রতিদিনের Sales</h3><p>শেষ ৭ দিনের Sample Data</p></div></div><div class="bars"><div><b>৳27,500</b><i style="height:45%"></i><small>26</small></div><div><b>৳36,000</b><i style="height:62%"></i><small>27</small></div><div><b>৳23,000</b><i style="height:38%"></i><small>28</small></div><div><b>৳42,000</b><i style="height:75%"></i><small>29</small></div><div><b>৳33,000</b><i style="height:56%"></i><small>30</small></div><div><b>৳46,000</b><i style="height:82%"></i><small>31</small></div><div><b>৳39,000</b><i style="height:69%"></i><small>01</small></div></div></div><div class="demo-note">এই Dashboard শুধু Demo বোঝানোর জন্য।</div></section>
-<section id="products" class="panel"><div class="section-head"><div><span class="eyebrow">PRODUCTS &amp; STOCK DEMO</span><h2>Products &amp; Stock Management</h2></div><button class="primary" id="addCompanyBtn">＋ Company</button></div><div class="card"><div class="card-title"><div><h3>Company নির্বাচন</h3><p>Company নির্বাচন করলে তার Product List দেখা যাবে।</p></div></div><div id="companyGrid" class="company-grid"></div></div><div class="card"><div class="card-title"><div><h3 id="selectedCompanyTitle">RAK Ceramics</h3><p>Product List / পণ্যের তালিকা</p></div><button class="primary" id="addProductBtn">＋ Add Product</button></div><div class="table-wrap"><table><thead><tr><th>SL</th><th>Product</th><th>Box/Ctn</th><th>Pcs</th><th>Purchase Price</th><th>Selling Price</th><th>Stock Quantity</th><th>Remark</th><th>Action</th></tr></thead><tbody id="productBody"></tbody></table></div></div></section>
-<section id="invoice" class="panel"><div class="section-head"><div><span class="eyebrow">SALES INVOICE DEMO</span><h2>Sales Invoice / বিক্রয় চালান</h2></div><button class="primary" id="newInvoiceBtn">＋ New Invoice</button></div><div class="invoice card"><div class="invoice-head"><div><h2>MTC ENTERPRISE SYSTEM</h2><p>Sales Invoice — DEMO</p></div><strong id="invoiceNo">INV-1007</strong></div><div class="invoice-meta"><label>Customer<input value="Demo Customer"></label><label>Date<input type="date" id="invDate"></label></div><div class="table-wrap"><table><thead><tr><th>SL</th><th>Product</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead><tbody id="invoiceBody"></tbody></table></div><div class="invoice-actions"><button class="secondary" id="addInvoiceRow">＋ Add Item</button><div><span>Grand Total</span><strong id="grandTotal">৳ 0</strong></div></div><div class="demo-note">Demo Invoice — interface বোঝানোর জন্য।</div></div></section>
-<section id="history" class="panel"><div class="section-head"><div><span class="eyebrow">SALES HISTORY DEMO</span><h2>Sales History / বিক্রয়ের ইতিহাস</h2><p class="section-sub">Invoice অনুযায়ী বিক্রয়ের তথ্য, Paid এবং Due অবস্থা দেখা যাবে।</p></div><button class="secondary" id="historyFilterBtn">🔎 Show Due Only</button></div><div class="card table-wrap"><table><thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th>Sales</th><th>Paid</th><th>Due</th><th>Status</th></tr></thead><tbody><tr><td>INV-1007</td><td>01 Sep 2026</td><td>Demo Customer</td><td>৳45,500</td><td>৳30,000</td><td class="danger">৳15,500</td><td><span class="pill due">Due</span></td></tr><tr><td>INV-1006</td><td>31 Aug 2026</td><td>Rahim Traders</td><td>৳72,000</td><td>৳72,000</td><td>৳0</td><td><span class="pill paid">Paid</span></td></tr><tr><td>INV-1005</td><td>30 Aug 2026</td><td>Karim Enterprise</td><td>৳38,500</td><td>৳20,000</td><td class="danger">৳18,500</td><td><span class="pill due">Due</span></td></tr></tbody></table></div></section>
-<section id="collection" class="panel"><div class="section-head"><div><span class="eyebrow">DUE / COLLECTION DEMO</span><h2>Due &amp; Collection / বকেয়া ও আদায়</h2></div></div><div class="stats"><article class="stat orange"><small>Total Due</small><strong>৳ 2,35,500</strong><em>8 Customers</em></article><article class="stat green"><small>Collected This Month</small><strong>৳ 4,82,000</strong><em>Collection</em></article><article class="stat blue"><small>Today's Collection</small><strong>৳ 32,500</strong><em>5 Payments</em></article></div><div class="card table-wrap"><table><thead><tr><th>Invoice</th><th>Customer</th><th>Total</th><th>Previous Paid</th><th>Due</th><th>Collection</th></tr></thead><tbody><tr><td>INV-1007</td><td>Demo Customer</td><td>৳45,500</td><td>৳30,000</td><td class="danger">৳15,500</td><td><button class="small-btn collectBtn">Collect</button></td></tr><tr><td>INV-1005</td><td>Karim Enterprise</td><td>৳38,500</td><td>৳20,000</td><td class="danger">৳18,500</td><td><button class="small-btn collectBtn">Collect</button></td></tr></tbody></table></div></section>
-<section id="reports" class="panel"><div class="section-head"><div><span class="eyebrow">SALES REPORTS DEMO</span><h2>Sales Reports / বিক্রয় রিপোর্ট</h2></div></div><div class="stats"><article class="stat blue"><small>Total Sales</small><strong>৳ 8,75,000</strong><em>This Month</em></article><article class="stat purple"><small>Total Invoices</small><strong>126</strong><em>This Month</em></article><article class="stat green"><small>Paid Sales</small><strong>৳ 6,39,500</strong><em>Collected</em></article><article class="stat orange"><small>Due Sales</small><strong>৳ 2,35,500</strong><em>Outstanding</em></article></div><div class="card"><div class="card-title"><div><h3>Monthly Sales Summary</h3><p>Sample report</p></div><button class="secondary" id="printReport">🖨 Print</button></div><div class="report-grid"><div><span>August</span><b>৳ 7,92,000</b><small>112 Invoices</small></div><div><span>September</span><b>৳ 8,75,000</b><small>126 Invoices</small></div><div><span>Growth</span><b>+10.48%</b><small>Compared with previous period</small></div></div></div></section>
-<section id="accounts" class="panel"><div class="section-head"><div><span class="eyebrow">ACCOUNTS DEMO</span><h2>Accounts / হিসাব</h2><p class="section-sub">Income, Expense, Profit এবং Balance-এর একটি Sample হিসাব দেখুন।</p></div><button class="secondary" id="printAccounts">🖨 Print</button></div><div class="stats"><article class="stat green"><small>Sales Profit</small><strong>৳ 1,85,000</strong><em>Sample</em></article><article class="stat blue"><small>Other Income</small><strong>৳ 35,000</strong><em>Sample</em></article><article class="stat orange"><small>Total Expense</small><strong>৳ 78,500</strong><em>Sample</em></article><article class="stat purple"><small>Net Profit</small><strong>৳ 1,41,500</strong><em>After expenses</em></article></div><div class="card table-wrap"><table><thead><tr><th>Category</th><th>Description</th><th>Income</th><th>Expense</th><th>Balance</th></tr></thead><tbody><tr><td>Sales Profit</td><td>Product sales profit</td><td>৳1,85,000</td><td>—</td><td>৳1,85,000</td></tr><tr><td>Other Income</td><td>Other business income</td><td>৳35,000</td><td>—</td><td>৳35,000</td></tr><tr><td>Expense</td><td>Business expenses</td><td>—</td><td class="danger">৳78,500</td><td class="danger">-৳78,500</td></tr></tbody></table></div></section></main>
-<div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h3 id="modalTitle">Add Product</h3><button id="closeModal">×</button></div><form id="productForm"><input type="hidden" id="editIndex" value="-1"><label>Product Name<input id="pName" required></label><div class="form-grid"><label>Box/Ctn<input id="pCarton" type="number" min="0"></label><label>Pcs<input id="pPiece" type="number" min="0"></label></div><div class="form-grid"><label>Purchase Price<input id="pPurchase" type="number" min="0"></label><label>Selling Price<input id="pSale" type="number" min="0"></label></div><label>Stock Quantity<input id="pStock" required placeholder="e.g. 120 Sqft"></label><label>Remark<input id="pRemark" placeholder="Available / New"></label><button class="primary wide" type="submit">Update / Save Product</button></form></div></div>
-<div class="modal" id="companyModal"><div class="modal-box small"><div class="modal-head"><h3>Others Company</h3><button id="closeCompanyModal">×</button></div><form id="companyForm"><label>Company Name<input id="companyName" placeholder="Company name লিখুন" required></label><button class="primary wide" type="submit">Add Company</button></form></div></div>
-<script src="public-demo.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MTC Enterprise System | Public Demo</title>
+  <link rel="stylesheet" href="public-demo.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">M</div>
+    <div>
+      <strong>MTC Enterprise System</strong>
+      <small>Public Demo / পাবলিক ডেমো</small>
+    </div>
+  </div>
+  <span class="badge">PUBLIC DEMO</span>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <div>
+    <span class="eyebrow">MTC ENTERPRISE SYSTEM</span>
+    <h1>Public Demo <span>Experience</span></h1>
+    <p>
+      Demo data দিয়ে Software-এর প্রতিটি গুরুত্বপূর্ণ অংশ দেখা ও ব্যবহার করে বোঝা যাবে।
+      এটি কোনো বাস্তব ব্যবসার তথ্য নয়।
+    </p>
+  </div>
+  <span class="sample">Sample Data</span>
+</section>
+
+<nav class="tabs">
+  <button class="tab active" data-section="dashboard">📊 Dashboard Demo</button>
+  <button class="tab" data-section="products">📦 Products &amp; Stock Demo</button>
+  <button class="tab" data-section="invoice">🧾 Sales Invoice Demo</button>
+  <button class="tab" data-section="history">📋 Sales History Demo</button>
+  <button class="tab" data-section="collection">💰 Due / Collection Demo</button>
+  <button class="tab" data-section="reports">📈 Sales Reports Demo</button>
+  <button class="tab" data-section="accounts">💼 Accounts Demo</button>
+</nav>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="panel active">
+
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">DASHBOARD DEMO</span>
+      <h2>Business Overview / ব্যবসার সারসংক্ষেপ</h2>
+    </div>
+    <span class="chip">Live Demo UI</span>
+  </div>
+
+  <div class="stats">
+
+    <article class="stat blue">
+      <small>This Month's Sales</small>
+      <strong>৳ 8,75,000</strong>
+      <em>18,450 Sqft</em>
+    </article>
+
+    <article class="stat purple">
+      <small>Total Stock</small>
+      <strong>42,680</strong>
+      <em>Sqft / Piece / Box</em>
+    </article>
+
+    <article class="stat green">
+      <small>Total Stock Value</small>
+      <strong>৳ 18,40,000</strong>
+      <em>Purchase Value</em>
+    </article>
+
+    <article class="stat orange">
+      <small>Total Due</small>
+      <strong>৳ 2,35,500</strong>
+      <em>Customer Due</em>
+    </article>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <div>
+        <h3>Daily Sales / প্রতিদিনের Sales</h3>
+        <p>শেষ ৭ দিনের Sample Data</p>
+      </div>
+    </div>
+
+    <div class="bars">
+
+      <div>
+        <b>৳27,500</b>
+        <i style="height:45%"></i>
+        <small>26</small>
+      </div>
+
+      <div>
+        <b>৳36,000</b>
+        <i style="height:62%"></i>
+        <small>27</small>
+      </div>
+
+      <div>
+        <b>৳23,000</b>
+        <i style="height:38%"></i>
+        <small>28</small>
+      </div>
+
+      <div>
+        <b>৳42,000</b>
+        <i style="height:75%"></i>
+        <small>29</small>
+      </div>
+
+      <div>
+        <b>৳33,000</b>
+        <i style="height:56%"></i>
+        <small>30</small>
+      </div>
+
+      <div>
+        <b>৳46,000</b>
+        <i style="height:82%"></i>
+        <small>31</small>
+      </div>
+
+      <div>
+        <b>৳39,000</b>
+        <i style="height:69%"></i>
+        <small>01</small>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="demo-note">
+    এই Dashboard শুধু Demo বোঝানোর জন্য।
+  </div>
+
+</section>
+
+
+<!-- PRODUCTS & STOCK -->
+
+<section id="products" class="panel">
+
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">PRODUCTS &amp; STOCK DEMO</span>
+      <h2>Products &amp; Stock Management</h2>
+    </div>
+
+    <button class="primary" id="addCompanyBtn">
+      ＋ Company
+    </button>
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <div>
+        <h3>Company নির্বাচন</h3>
+        <p>Company নির্বাচন করলে তার Product List দেখা যাবে।</p>
+      </div>
+    </div>
+
+    <div id="companyGrid" class="company-grid"></div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-title">
+
+      <div>
+        <h3 id="selectedCompanyTitle">RAK Ceramics</h3>
+        <p>Product List / পণ্যের তালিকা</p>
+      </div>
+
+      <button class="primary" id="addProductBtn">
+        ＋ Add Product
+      </button>
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>SL</th>
+            <th>Product</th>
+            <th>Box/Ctn</th>
+            <th>Pcs</th>
+            <th>Purchase Price</th>
+            <th>Selling Price</th>
+            <th>Stock Quantity</th>
+            <th>Remark</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="productBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SALES INVOICE -->
+
+<section id="invoice" class="panel">
+
+  <div class="section-head">
+
+    <div>
+      <span class="eyebrow">SALES INVOICE DEMO</span>
+      <h2>Sales Invoice / বিক্রয় চালান</h2>
+    </div>
+
+    <button class="primary" id="newInvoiceBtn">
+      ＋ New Invoice
+    </button>
+
+  </div>
+
+
+  <div class="invoice card">
+
+    <div class="invoice-head">
+
+      <div>
+        <h2>MTC ENTERPRISE SYSTEM</h2>
+        <p>Sales Invoice — DEMO</p>
+      </div>
+
+      <strong id="invoiceNo">INV-1007</strong>
+
+    </div>
+
+
+    <div class="invoice-meta">
+
+      <label>
+        Customer
+        <input value="Demo Customer">
+      </label>
+
+      <label>
+        Date
+        <input type="date" id="invDate">
+      </label>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>SL</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody id="invoiceBody"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="invoice-actions">
+
+      <button class="secondary" id="addInvoiceRow">
+        ＋ Add Item
+      </button>
+
+      <div>
+        <span>Grand Total</span>
+        <strong id="grandTotal">৳ 0</strong>
+      </div>
+
+    </div>
+
+
+    <div class="demo-note">
+      Demo Invoice — interface বোঝানোর জন্য।
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SALES HISTORY -->
+
+<section id="history" class="panel">
+
+  <div class="section-head">
+
+    <div>
+      <span class="eyebrow">SALES HISTORY DEMO</span>
+      <h2>Sales History / বিক্রয়ের ইতিহাস</h2>
+      <p class="section-sub">
+        Invoice অনুযায়ী বিক্রয়ের তথ্য, Paid এবং Due অবস্থা দেখা যাবে।
+      </p>
+    </div>
+
+    <button class="secondary" id="historyFilterBtn">
+      🔎 Show Due Only
+    </button>
+
+  </div>
+
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Invoice</th>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Sales</th>
+          <th>Paid</th>
+          <th>Due</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>INV-1007</td>
+          <td>01 Sep 2026</td>
+          <td>Demo Customer</td>
+          <td>৳45,500</td>
+          <td>৳30,000</td>
+          <td class="danger">৳15,500</td>
+          <td>
+            <span class="pill due">Due</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>INV-1006</td>
+          <td>31 Aug 2026</td>
+          <td>Rahim Traders</td>
+          <td>৳72,000</td>
+          <td>৳72,000</td>
+          <td>৳0</td>
+          <td>
+            <span class="pill paid">Paid</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>INV-1005</td>
+          <td>30 Aug 2026</td>
+          <td>Karim Enterprise</td>
+          <td>৳38,500</td>
+          <td>৳20,000</td>
+          <td class="danger">৳18,500</td>
+          <td>
+            <span class="pill due">Due</span>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- DUE / COLLECTION -->
+
+<section id="collection" class="panel">
+
+  <div class="section-head">
+
+    <div>
+      <span class="eyebrow">DUE / COLLECTION DEMO</span>
+      <h2>Due &amp; Collection / বকেয়া ও আদায়</h2>
+    </div>
+
+  </div>
+
+
+  <div class="stats">
+
+    <article class="stat orange">
+      <small>Total Due</small>
+      <strong>৳ 2,35,500</strong>
+      <em>8 Customers</em>
+    </article>
+
+    <article class="stat green">
+      <small>Collected This Month</small>
+      <strong>৳ 4,82,000</strong>
+      <em>Collection</em>
+    </article>
+
+    <article class="stat blue">
+      <small>Today's Collection</small>
+      <strong>৳ 32,500</strong>
+      <em>5 Payments</em>
+    </article>
+
+  </div>
+
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Invoice</th>
+          <th>Customer</th>
+          <th>Total</th>
+          <th>Previous Paid</th>
+          <th>Due</th>
+          <th>Collection</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>INV-1007</td>
+          <td>Demo Customer</td>
+          <td>৳45,500</td>
+          <td>৳30,000</td>
+          <td class="danger">৳15,500</td>
+          <td>
+            <button class="small-btn collectBtn">
+              Collect
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>INV-1005</td>
+          <td>Karim Enterprise</td>
+          <td>৳38,500</td>
+          <td>৳20,000</td>
+          <td class="danger">৳18,500</td>
+          <td>
+            <button class="small-btn collectBtn">
+              Collect
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- SALES REPORTS -->
+
+<section id="reports" class="panel">
+
+  <div class="section-head">
+
+    <div>
+      <span class="eyebrow">SALES REPORTS DEMO</span>
+      <h2>Sales Reports / বিক্রয় রিপোর্ট</h2>
+    </div>
+
+  </div>
+
+
+  <div class="stats">
+
+    <article class="stat blue">
+      <small>Total Sales</small>
+      <strong>৳ 8,75,000</strong>
+      <em>This Month</em>
+    </article>
+
+    <article class="stat purple">
+      <small>Total Invoices</small>
+      <strong>126</strong>
+      <em>This Month</em>
+    </article>
+
+    <article class="stat green">
+      <small>Paid Sales</small>
+      <strong>৳ 6,39,500</strong>
+      <em>Collected</em>
+    </article>
+
+    <article class="stat orange">
+      <small>Due Sales</small>
+      <strong>৳ 2,35,500</strong>
+      <em>Outstanding</em>
+    </article>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-title">
+
+      <div>
+        <h3>Monthly Sales Summary</h3>
+        <p>Sample report</p>
+      </div>
+
+      <button class="secondary" id="printReport">
+        🖨 Print
+      </button>
+
+    </div>
+
+
+    <div class="report-grid">
+
+      <div>
+        <span>August</span>
+        <b>৳ 7,92,000</b>
+        <small>112 Invoices</small>
+      </div>
+
+      <div>
+        <span>September</span>
+        <b>৳ 8,75,000</b>
+        <small>126 Invoices</small>
+      </div>
+
+      <div>
+        <span>Growth</span>
+        <b>+10.48%</b>
+        <small>Compared with previous period</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ACCOUNTS -->
+
+<section id="accounts" class="panel">
+
+  <div class="section-head">
+
+    <div>
+      <span class="eyebrow">ACCOUNTS DEMO</span>
+      <h2>Accounts / হিসাব</h2>
+
+      <p class="section-sub">
+        Income, Expense, Profit এবং Balance-এর একটি Sample হিসাব দেখুন।
+      </p>
+    </div>
+
+    <button class="secondary" id="printAccounts">
+      🖨 Print
+    </button>
+
+  </div>
+
+
+  <div class="stats">
+
+    <article class="stat green">
+      <small>Sales Profit</small>
+      <strong>৳ 1,85,000</strong>
+      <em>Sample</em>
+    </article>
+
+    <article class="stat blue">
+      <small>Other Income</small>
+      <strong>৳ 35,000</strong>
+      <em>Sample</em>
+    </article>
+
+    <article class="stat orange">
+      <small>Total Expense</small>
+      <strong>৳ 78,500</strong>
+      <em>Sample</em>
+    </article>
+
+    <article class="stat purple">
+      <small>Net Profit</small>
+      <strong>৳ 1,41,500</strong>
+      <em>After expenses</em>
+    </article>
+
+  </div>
+
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Income</th>
+          <th>Expense</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Sales Profit</td>
+          <td>Product sales profit</td>
+          <td>৳1,85,000</td>
+          <td>—</td>
+          <td>৳1,85,000</td>
+        </tr>
+
+        <tr>
+          <td>Other Income</td>
+          <td>Other business income</td>
+          <td>৳35,000</td>
+          <td>—</td>
+          <td>৳35,000</td>
+        </tr>
+
+        <tr>
+          <td>Expense</td>
+          <td>Business expenses</td>
+          <td>—</td>
+          <td class="danger">৳78,500</td>
+          <td class="danger">-৳78,500</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- PRODUCT MODAL -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h3 id="modalTitle">Add Product</h3>
+      <button id="closeModal">×</button>
+    </div>
+
+    <form id="productForm">
+
+      <input type="hidden" id="editIndex" value="-1">
+
+      <label>
+        Product Name
+        <input id="pName" required>
+      </label>
+
+      <div class="form-grid">
+
+        <label>
+          Box/Ctn
+          <input id="pCarton" type="number" min="0">
+        </label>
+
+        <label>
+          Pcs
+          <input id="pPiece" type="number" min="0">
+        </label>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <label>
+          Purchase Price
+          <input id="pPurchase" type="number" min="0">
+        </label>
+
+        <label>
+          Selling Price
+          <input id="pSale" type="number" min="0">
+        </label>
+
+      </div>
+
+
+      <label>
+        Stock Quantity
+        <input id="pStock" required placeholder="e.g. 120 Sqft">
+      </label>
+
+      <label>
+        Remark
+        <input id="pRemark" placeholder="Available / New">
+      </label>
+
+      <button class="primary wide" type="submit">
+        Update / Save Product
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- COMPANY MODAL -->
+
+<div class="modal" id="companyModal">
+
+  <div class="modal-box small">
+
+    <div class="modal-head">
+      <h3>Others Company</h3>
+      <button id="closeCompanyModal">×</button>
+    </div>
+
+    <form id="companyForm">
+
+      <label>
+        Company Name
+        <input
+          id="companyName"
+          placeholder="Company name লিখুন"
+          required
+        >
+      </label>
+
+      <button class="primary wide" type="submit">
+        Add Company
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script src="public-demo.js"></script>
+
+</body>
+</html>
