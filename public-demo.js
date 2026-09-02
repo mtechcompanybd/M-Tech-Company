@@ -12,7 +12,9 @@ const companies = [
   "Others Company"
 ];
 
+
 const data = {
+
   "RAK Ceramics": [
     {
       name: "RAK Marble White / RAK-102",
@@ -153,84 +155,52 @@ const data = {
       remark: "Demo"
     }
   ]
+
 };
 
 
 let selected = companies[0];
-
-const $ = (selector) => document.querySelector(selector);
-
-const money = (number) =>
-  "৳ " + Number(number || 0).toLocaleString("en-BD");
+let dueOnly = false;
 
 
-/* =========================================================
-   FEATURE TAB NAVIGATION
-   ========================================================= */
-document.querySelectorAll(".tab").forEach((button) => {
-
-  button.addEventListener("click", () => {
-
-    const targetId = button.dataset.section;
-
-    if (!targetId) return;
-
-    document
-      .querySelectorAll(".tab")
-      .forEach((btn) => btn.classList.remove("active"));
-
-    document
-      .querySelectorAll(".panel")
-      .forEach((panel) => panel.classList.remove("active"));
-
-    button.classList.add("active");
-
-    const targetPanel = document.getElementById(targetId);
-
-    if (targetPanel) {
-      targetPanel.classList.add("active");
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  });
-
-});
+const $ = s => document.querySelector(s);
 
 
-/* =========================================================
+const money = n =>
+  "৳ " + Number(n || 0).toLocaleString("en-BD");
+
+
+/* =========================
    PRODUCTS & STOCK
-   ========================================================= */
+========================= */
 
 function renderCompanies() {
 
-  const container = $("#companyGrid");
-  if (!container) return;
+  const g = $("#companyGrid");
 
-  container.innerHTML = "";
+  if (!g) return;
 
-  companies.forEach((company) => {
+  g.innerHTML = "";
 
-    const button = document.createElement("button");
+  companies.forEach(c => {
 
-    button.className =
-      "company" + (company === selected ? " active" : "");
+    const b = document.createElement("button");
 
-    button.textContent = company;
+    b.className =
+      "company" + (c === selected ? " active" : "");
 
-    button.addEventListener("click", () => {
+    b.textContent = c;
 
-      selected = company;
+    b.onclick = () => {
+
+      selected = c;
 
       renderCompanies();
       renderProducts();
 
-    });
+    };
 
-    container.appendChild(button);
+    g.appendChild(b);
 
   });
 
@@ -244,103 +214,76 @@ function renderProducts() {
 
   if (!title || !body) return;
 
-  title.textContent = selected + " / Product List";
+  title.textContent =
+    selected + " / Product List";
 
   body.innerHTML = "";
 
-  const products = data[selected] || [];
+  (data[selected] || []).forEach((p, i) => {
 
-  products.forEach((product, index) => {
+    const tr = document.createElement("tr");
 
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td>${index + 1}</td>
+    tr.innerHTML = `
+      <td>${i + 1}</td>
 
       <td>
-        <strong>${product.name}</strong>
+        <strong>${p.name}</strong>
       </td>
 
-      <td>${product.carton || 0}</td>
+      <td>${p.carton || 0}</td>
 
-      <td>${product.piece || 0}</td>
+      <td>${p.piece || 0}</td>
 
-      <td>${money(product.purchase)}</td>
+      <td>${money(p.purchase)}</td>
 
-      <td>${money(product.sale)}</td>
+      <td>${money(p.sale)}</td>
 
-      <td>${product.stock || ""}</td>
+      <td>${p.stock}</td>
 
-      <td>${product.remark || ""}</td>
+      <td>${p.remark || ""}</td>
 
       <td class="action">
 
         <button
           class="edit"
-          type="button">
+          onclick="editProduct(${i})">
           Edit
         </button>
 
         <button
           class="delete"
-          type="button">
+          onclick="deleteProduct(${i})">
           Delete
         </button>
 
       </td>
     `;
 
-
-    /* EDIT */
-
-    row
-      .querySelector(".edit")
-      .addEventListener("click", () => {
-
-        openProduct(index);
-
-      });
-
-
-    /* DELETE */
-
-    row
-      .querySelector(".delete")
-      .addEventListener("click", () => {
-
-        if (
-          confirm("Delete this demo product?")
-        ) {
-
-          data[selected].splice(index, 1);
-
-          renderProducts();
-
-        }
-
-      });
-
-
-    body.appendChild(row);
+    body.appendChild(tr);
 
   });
 
 }
 
 
-/* =========================================================
-   PRODUCT MODAL
-   ========================================================= */
+function openProduct(i = -1) {
 
-function openProduct(index = -1) {
-
-  const modal = $("#productModal");
+  const modal = $("#modal");
 
   if (!modal) return;
 
+  modal.classList.add("show");
 
-  const product =
-    index < 0
+  $("#editIndex").value = i;
+
+  $("#modalTitle").textContent =
+    i < 0
+      ? "Add Product / পণ্য যোগ"
+      : "Edit Product / পণ্য সম্পাদনা";
+
+
+  const p =
+    i < 0
       ? {
           name: "",
           carton: "",
@@ -350,98 +293,34 @@ function openProduct(index = -1) {
           stock: "",
           remark: ""
         }
-      : data[selected][index];
+      : data[selected][i];
 
 
-  $("#editIndex").value = index;
-
-  $("#modalTitle").textContent =
-    index < 0
-      ? "Add Product / পণ্য যোগ"
-      : "Edit Product / পণ্য সম্পাদনা";
-
-
-  $("#pName").value =
-    product.name ?? "";
-
-  $("#pCarton").value =
-    product.carton ?? "";
-
-  $("#pPiece").value =
-    product.piece ?? "";
-
-  $("#pPurchase").value =
-    product.purchase ?? "";
-
-  $("#pSelling").value =
-    product.sale ?? "";
-
-  $("#pStock").value =
-    product.stock ?? "";
-
-  $("#pRemark").value =
-    product.remark ?? "";
+  const values = [
+    p.name,
+    p.carton,
+    p.piece,
+    p.purchase,
+    p.sale,
+    p.stock,
+    p.remark
+  ];
 
 
-  modal.classList.add("show");
+  [
+    "pName",
+    "pCarton",
+    "pPiece",
+    "pPurchase",
+    "pSale",
+    "pStock",
+    "pRemark"
+  ].forEach((id, j) => {
 
-}
+    const el = $("#" + id);
 
-
-/* =========================================================
-   ADD PRODUCT BUTTON
-   ========================================================= */
-
-const addProductButton = $("#addProduct");
-
-if (addProductButton) {
-
-  addProductButton.addEventListener(
-    "click",
-    () => openProduct()
-  );
-
-}
-
-
-/* =========================================================
-   CLOSE PRODUCT MODAL
-   ========================================================= */
-
-const closeModalButton = $("#closeModal");
-
-if (closeModalButton) {
-
-  closeModalButton.addEventListener(
-    "click",
-    () => {
-
-      const modal = $("#productModal");
-
-      if (modal) {
-        modal.classList.remove("show");
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL BY CLICKING OUTSIDE
-   ========================================================= */
-
-const productModal = $("#productModal");
-
-if (productModal) {
-
-  productModal.addEventListener("click", (event) => {
-
-    if (event.target === productModal) {
-
-      productModal.classList.remove("show");
-
+    if (el) {
+      el.value = values[j] ?? "";
     }
 
   });
@@ -449,24 +328,63 @@ if (productModal) {
 }
 
 
-/* =========================================================
-   PRODUCT FORM
-   ========================================================= */
+window.editProduct = i =>
+  openProduct(i);
 
-const productForm = $("#productForm");
+
+window.deleteProduct = i => {
+
+  if (
+    confirm(
+      "Delete this demo product?"
+    )
+  ) {
+
+    data[selected].splice(i, 1);
+
+    renderProducts();
+
+  }
+
+};
+
+
+const addProductBtn =
+  $("#addProductBtn");
+
+if (addProductBtn) {
+
+  addProductBtn.onclick =
+    () => openProduct();
+
+}
+
+
+const closeModal =
+  $("#closeModal");
+
+if (closeModal) {
+
+  closeModal.onclick =
+    () => $("#modal").classList.remove("show");
+
+}
+
+
+const productForm =
+  $("#productForm");
 
 if (productForm) {
 
-  productForm.addEventListener("submit", (event) => {
+  productForm.onsubmit = e => {
 
-    event.preventDefault();
+    e.preventDefault();
 
-
-    const index =
+    const i =
       Number($("#editIndex").value);
 
 
-    const product = {
+    const p = {
 
       name:
         $("#pName").value.trim(),
@@ -481,7 +399,7 @@ if (productForm) {
         Number($("#pPurchase").value) || 0,
 
       sale:
-        Number($("#pSelling").value) || 0,
+        Number($("#pSale").value) || 0,
 
       stock:
         $("#pStock").value.trim(),
@@ -492,117 +410,655 @@ if (productForm) {
     };
 
 
-    if (!product.name) {
+    if (i < 0) {
 
-      alert(
-        "Please enter product name."
-      );
+      data[selected].push(p);
 
-      return;
+    } else {
 
-    }
-
-
-    /* ADD */
-
-    if (index < 0) {
-
-      data[selected].push(product);
-
-    }
-
-    /* EDIT */
-
-    else {
-
-      data[selected][index] = product;
+      data[selected][i] = p;
 
     }
 
 
-    $("#productModal")
-      .classList
-      .remove("show");
-
+    $("#modal")
+      .classList.remove("show");
 
     renderProducts();
 
-  });
+  };
 
 }
 
 
-/* =========================================================
+/* =========================
    ADD COMPANY
-   ========================================================= */
+========================= */
 
-const addCompanyButton = $("#addCompany");
+const addCompanyBtn =
+  $("#addCompanyBtn");
 
-if (addCompanyButton) {
+if (addCompanyBtn) {
 
-  addCompanyButton.addEventListener(
-    "click",
-    () => {
+  addCompanyBtn.onclick =
+    () =>
+      $("#companyModal")
+        .classList.add("show");
 
-      const input =
-        $("#newCompanyName");
-
-      if (!input) return;
-
-
-      const name =
-        input.value.trim();
+}
 
 
-      if (!name) {
+const closeCompanyModal =
+  $("#closeCompanyModal");
 
-        alert(
-          "Please enter company name."
-        );
+if (closeCompanyModal) {
 
-        return;
+  closeCompanyModal.onclick =
+    () =>
+      $("#companyModal")
+        .classList.remove("show");
 
-      }
+}
 
 
-      if (companies.includes(name)) {
+const companyForm =
+  $("#companyForm");
 
-        alert(
-          "This company already exists."
-        );
+if (companyForm) {
 
-        return;
+  companyForm.onsubmit = e => {
 
-      }
+    e.preventDefault();
 
+    const n =
+      $("#companyName").value.trim();
+
+
+    if (
+      n &&
+      !companies.includes(n)
+    ) {
 
       companies.splice(
         companies.length - 1,
         0,
-        name
+        n
       );
 
+      data[n] = [];
 
-      data[name] = [];
-
-
-      selected = name;
-
-      input.value = "";
-
+      selected = n;
 
       renderCompanies();
       renderProducts();
 
     }
-  );
+
+
+    $("#companyName").value = "";
+
+    $("#companyModal")
+      .classList.remove("show");
+
+  };
 
 }
 
 
-/* =========================================================
-   INITIAL LOAD
-   ========================================================= */
+/* =========================
+   TAB MENU
+========================= */
+
+document
+  .querySelectorAll(".tab")
+  .forEach(b => {
+
+    b.onclick = () => {
+
+      document
+        .querySelectorAll(".tab")
+        .forEach(x =>
+          x.classList.remove("active")
+        );
+
+
+      document
+        .querySelectorAll(".panel")
+        .forEach(x =>
+          x.classList.remove("active")
+        );
+
+
+      b.classList.add("active");
+
+
+      const panel =
+        $("#" + b.dataset.section);
+
+      if (panel) {
+        panel.classList.add("active");
+      }
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    };
+
+  });
+
+
+/* =========================
+   SALES INVOICE
+========================= */
+
+function addInvoiceRow(
+  name = "RAK Marble White",
+  qty = 10,
+  price = 85
+) {
+
+  const body =
+    $("#invoiceBody");
+
+  if (!body) return;
+
+
+  const tr =
+    document.createElement("tr");
+
+  const n =
+    body.children.length + 1;
+
+
+  tr.innerHTML = `
+    <td>${n}</td>
+
+    <td>
+      <input
+        class="rowName"
+        value="${name}">
+    </td>
+
+    <td>
+      <input
+        class="rowQty"
+        type="number"
+        value="${qty}"
+        min="0">
+    </td>
+
+    <td>
+      <input
+        class="rowPrice"
+        type="number"
+        value="${price}"
+        min="0">
+    </td>
+
+    <td class="rowTotal">
+      ${money(qty * price)}
+    </td>
+  `;
+
+
+  body.appendChild(tr);
+
+
+  tr.querySelectorAll("input")
+    .forEach(input => {
+
+      input.addEventListener(
+        "input",
+        updateInvoiceTotal
+      );
+
+    });
+
+
+  updateInvoiceTotal();
+
+}
+
+
+/* =========================
+   INVOICE TOTAL
+========================= */
+
+function getInvoiceGrandTotal() {
+
+  let total = 0;
+
+
+  document
+    .querySelectorAll(
+      "#invoiceBody tr"
+    )
+    .forEach(tr => {
+
+      const q =
+        Number(
+          tr.querySelector(
+            ".rowQty"
+          ).value
+        ) || 0;
+
+
+      const p =
+        Number(
+          tr.querySelector(
+            ".rowPrice"
+          ).value
+        ) || 0;
+
+
+      total += q * p;
+
+    });
+
+
+  return total;
+
+}
+
+
+function updateInvoiceTotal() {
+
+  let total =
+    getInvoiceGrandTotal();
+
+
+  document
+    .querySelectorAll(
+      "#invoiceBody tr"
+    )
+    .forEach(tr => {
+
+      const q =
+        Number(
+          tr.querySelector(
+            ".rowQty"
+          ).value
+        ) || 0;
+
+
+      const p =
+        Number(
+          tr.querySelector(
+            ".rowPrice"
+          ).value
+        ) || 0;
+
+
+      tr.querySelector(
+        ".rowTotal"
+      ).textContent =
+        money(q * p);
+
+    });
+
+
+  $("#grandTotal").textContent =
+    money(total);
+
+
+  updateInvoiceSummary(total);
+
+}
+
+
+/* =========================
+   INVOICE SUMMARY
+========================= */
+
+function updateInvoiceSummary(
+  grandTotal
+) {
+
+  const labour =
+    Math.max(
+      0,
+      Number(
+        $("#labourCharge").value
+      ) || 0
+    );
+
+
+  const discount =
+    Math.max(
+      0,
+      Number(
+        $("#discount").value
+      ) || 0
+    );
+
+
+  const paid =
+    Math.max(
+      0,
+      Number(
+        $("#paidBill").value
+      ) || 0
+    );
+
+
+  const payable =
+    Math.max(
+      0,
+      grandTotal +
+      labour -
+      discount
+    );
+
+
+  const due =
+    Math.max(
+      0,
+      payable - paid
+    );
+
+
+  $("#payableBill").textContent =
+    money(payable);
+
+
+  $("#invoiceDue").textContent =
+    money(due);
+
+}
+
+
+/* =========================
+   SUMMARY INPUTS
+========================= */
+
+[
+  "#labourCharge",
+  "#discount",
+  "#paidBill"
+].forEach(selector => {
+
+  const input = $(selector);
+
+  if (!input) return;
+
+
+  input.addEventListener(
+    "input",
+    () => {
+
+      updateInvoiceSummary(
+        getInvoiceGrandTotal()
+      );
+
+    }
+  );
+
+});
+
+
+/* =========================
+   ADD INVOICE ITEM
+========================= */
+
+const addInvoiceRowBtn =
+  $("#addInvoiceRow");
+
+if (addInvoiceRowBtn) {
+
+  addInvoiceRowBtn.onclick =
+    () =>
+      addInvoiceRow(
+        "New Product",
+        1,
+        100
+      );
+
+}
+
+
+/* =========================
+   NEW INVOICE
+========================= */
+
+const newInvoiceBtn =
+  $("#newInvoiceBtn");
+
+if (newInvoiceBtn) {
+
+  newInvoiceBtn.onclick = () => {
+
+    const invoiceNo =
+      "INV-" +
+      (
+        1008 +
+        Math.floor(
+          Math.random() * 90
+        )
+      );
+
+
+    $("#invoiceNo").textContent =
+      invoiceNo;
+
+
+    $("#invoiceBody").innerHTML =
+      "";
+
+
+    $("#labourCharge").value =
+      0;
+
+    $("#discount").value =
+      0;
+
+    $("#paidBill").value =
+      0;
+
+
+    addInvoiceRow();
+
+    addInvoiceRow(
+      "RAK Floor Grey",
+      5,
+      75
+    );
+
+
+    alert(
+      "New demo invoice created."
+    );
+
+  };
+
+}
+
+
+/* =========================
+   DUE / COLLECTION
+========================= */
+
+document
+  .querySelectorAll(".collectBtn")
+  .forEach(b => {
+
+    b.onclick = () => {
+
+      const row =
+        b.closest("tr");
+
+
+      const dueCell =
+        row.querySelector(".danger");
+
+
+      const current =
+        dueCell
+          ? dueCell.textContent
+          : "৳0";
+
+
+      const amount =
+        prompt(
+          "Collection amount / আদায়ের পরিমাণ লিখুন",
+          current.replace(
+            /[^0-9]/g,
+            ""
+          )
+        );
+
+
+      if (
+        amount !== null &&
+        !isNaN(Number(amount))
+      ) {
+
+        const n =
+          Number(amount);
+
+
+        if (n > 0) {
+
+          if (dueCell) {
+
+            const oldDue =
+              Number(
+                current.replace(
+                  /[^0-9]/g,
+                  ""
+                )
+              ) || 0;
+
+
+            dueCell.textContent =
+              money(
+                Math.max(
+                  0,
+                  oldDue - n
+                )
+              );
+
+          }
+
+
+          b.textContent =
+            "Collected ✓";
+
+          b.disabled = true;
+
+
+          alert(
+            "Demo collection recorded: " +
+            money(n) +
+            ". Real Firebase data is not changed."
+          );
+
+        }
+
+      }
+
+    };
+
+  });
+
+
+/* =========================
+   PRINT
+========================= */
+
+const printReport =
+  $("#printReport");
+
+if (printReport) {
+
+  printReport.onclick =
+    () => window.print();
+
+}
+
+
+const printAccounts =
+  $("#printAccounts");
+
+if (printAccounts) {
+
+  printAccounts.onclick =
+    () => window.print();
+
+}
+
+
+/* =========================
+   HISTORY FILTER
+========================= */
+
+const historyFilterBtn =
+  $("#historyFilterBtn");
+
+if (historyFilterBtn) {
+
+  historyFilterBtn.onclick = () => {
+
+    dueOnly = !dueOnly;
+
+
+    historyFilterBtn.textContent =
+      dueOnly
+        ? "🔎 Show All"
+        : "🔎 Show Due Only";
+
+
+    document
+      .querySelectorAll(
+        "#history tbody tr"
+      )
+      .forEach(tr => {
+
+        tr.style.display =
+          dueOnly
+            ? (
+                tr.querySelector(
+                  ".pill.due"
+                )
+                  ? ""
+                  : "none"
+              )
+            : "";
+
+      });
+
+  };
+
+}
+
+
+/* =========================
+   INITIAL DATA
+========================= */
+
+const invDate =
+  $("#invDate");
+
+if (invDate) {
+
+  invDate.value =
+    new Date()
+      .toISOString()
+      .slice(0, 10);
+
+}
+
+
+addInvoiceRow();
+
+addInvoiceRow(
+  "RAK Floor Grey",
+  5,
+  75
+);
+
 
 renderCompanies();
 
