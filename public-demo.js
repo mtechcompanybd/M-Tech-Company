@@ -877,91 +877,253 @@ if (newInvoiceBtn) {
 
 
 /* =========================
-   DUE / COLLECTION
+   DUE / COLLECTION DEMO
 ========================= */
+
+let collectionRow = null;
 
 document
   .querySelectorAll(".collectBtn")
-  .forEach(b => {
+  .forEach(button => {
 
-    b.onclick = () => {
+    button.onclick = () => {
 
-      const row =
-        b.closest("tr");
+      collectionRow =
+        button.closest("tr");
 
+      const cells =
+        collectionRow.querySelectorAll("td");
 
-      const dueCell =
-        row.querySelector(".danger");
+      const invoice =
+        cells[0].textContent.trim();
 
+      const customer =
+        cells[1].textContent.trim();
 
-      const current =
-        dueCell
-          ? dueCell.textContent
-          : "৳0";
+      const due =
+        Number(
+          cells[4]
+            .textContent
+            .replace(/[^0-9.]/g, "")
+        ) || 0;
 
+      $("#collectionInvoice")
+        .value = invoice;
 
-      const amount =
-        prompt(
-          "Collection amount / আদায়ের পরিমাণ লিখুন",
-          current.replace(
-            /[^0-9]/g,
-            ""
-          )
-        );
+      $("#collectionCustomer")
+        .value = customer;
 
+      $("#collectionCurrentDue")
+        .value = money(due);
 
-      if (
-        amount !== null &&
-        !isNaN(Number(amount))
-      ) {
+      $("#collectionAmount")
+        .value = "";
 
-        const n =
-          Number(amount);
+      $("#collectionAmount")
+        .max = due;
 
+      $("#collectionDate")
+        .value =
+        new Date()
+          .toISOString()
+          .slice(0, 10);
 
-        if (n > 0) {
+      $("#collectionNote")
+        .value = "";
 
-          if (dueCell) {
-
-            const oldDue =
-              Number(
-                current.replace(
-                  /[^0-9]/g,
-                  ""
-                )
-              ) || 0;
-
-
-            dueCell.textContent =
-              money(
-                Math.max(
-                  0,
-                  oldDue - n
-                )
-              );
-
-          }
-
-
-          b.textContent =
-            "Collected ✓";
-
-          b.disabled = true;
-
-
-          alert(
-            "Demo collection recorded: " +
-            money(n) +
-            ". Real Firebase data is not changed."
-          );
-
-        }
-
-      }
+      $("#collectionModal")
+        .classList.add("show");
 
     };
 
   });
+
+
+/* =========================
+   CLOSE COLLECTION MODAL
+========================= */
+
+const closeCollectionModal =
+  $("#closeCollectionModal");
+
+if (closeCollectionModal) {
+
+  closeCollectionModal.onclick =
+    () => {
+
+      $("#collectionModal")
+        .classList.remove("show");
+
+      collectionRow = null;
+
+    };
+
+}
+
+
+/* =========================
+   SAVE COLLECTION
+========================= */
+
+const collectionForm =
+  $("#collectionForm");
+
+if (collectionForm) {
+
+  collectionForm.onsubmit = e => {
+
+    e.preventDefault();
+
+    if (!collectionRow) {
+      return;
+    }
+
+    const cells =
+      collectionRow.querySelectorAll("td");
+
+    const previousPaid =
+      Number(
+        cells[3]
+          .textContent
+          .replace(/[^0-9.]/g, "")
+      ) || 0;
+
+    const currentDue =
+      Number(
+        cells[4]
+          .textContent
+          .replace(/[^0-9.]/g, "")
+      ) || 0;
+
+    const amount =
+      Number(
+        $("#collectionAmount").value
+      ) || 0;
+
+    if (amount <= 0) {
+
+      alert(
+        "Please enter collection amount."
+      );
+
+      return;
+
+    }
+
+    if (amount > currentDue) {
+
+      alert(
+        "Collection amount cannot be greater than Due."
+      );
+
+      return;
+
+    }
+
+    const newPaid =
+      previousPaid + amount;
+
+    const newDue =
+      Math.max(
+        0,
+        currentDue - amount
+      );
+
+    cells[3].textContent =
+      money(newPaid);
+
+    cells[4].textContent =
+      money(newDue);
+
+    if (newDue === 0) {
+
+      cells[5].innerHTML =
+        '<span class="pill paid">Paid</span>';
+
+    } else {
+
+      cells[5].innerHTML =
+        '<button class="small-btn collectBtn">Collect</button>';
+
+      const newButton =
+        cells[5]
+          .querySelector(".collectBtn");
+
+      newButton.onclick =
+        () => {
+
+          collectionRow =
+            newButton.closest("tr");
+
+          const rowCells =
+            collectionRow
+              .querySelectorAll("td");
+
+          $("#collectionInvoice")
+            .value =
+            rowCells[0]
+              .textContent
+              .trim();
+
+          $("#collectionCustomer")
+            .value =
+            rowCells[1]
+              .textContent
+              .trim();
+
+          const remainingDue =
+            Number(
+              rowCells[4]
+                .textContent
+                .replace(
+                  /[^0-9.]/g,
+                  ""
+                )
+            ) || 0;
+
+          $("#collectionCurrentDue")
+            .value =
+            money(remainingDue);
+
+          $("#collectionAmount")
+            .value = "";
+
+          $("#collectionAmount")
+            .max = remainingDue;
+
+          $("#collectionDate")
+            .value =
+            new Date()
+              .toISOString()
+              .slice(0, 10);
+
+          $("#collectionNote")
+            .value = "";
+
+          $("#collectionModal")
+            .classList.add("show");
+
+        };
+
+    }
+
+    $("#collectionModal")
+      .classList.remove("show");
+
+    collectionRow = null;
+
+    alert(
+      "Collection recorded successfully.\n\n" +
+      "Collected: " +
+      money(amount) +
+      "\nRemaining Due: " +
+      money(newDue) +
+      "\n\nDemo data only."
+    );
+
+  };
+
+}
 
 
 /* =========================
