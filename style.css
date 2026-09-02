@@ -161,7 +161,10 @@ img{
   gap:65px;
   align-items:center
 }
-
+.hero-copy{
+  grid-column:1;
+  grid-row:1;
+}
 .eyebrow,
 .section-kicker{
   font-size:11px;
