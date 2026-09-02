@@ -1770,7 +1770,21 @@
 
     const customerEmail =
       document.getElementById("customerEmail");
+const softwareOrderForm =
+  document.getElementById("softwareOrderForm");
 
+const orderReplyTo =
+  document.getElementById("orderReplyTo");
+
+softwareOrderForm.addEventListener(
+  "submit",
+  function () {
+
+    orderReplyTo.value =
+      customerEmail.value;
+
+  }
+);
     const companyName =
       document.getElementById("companyName");
 
