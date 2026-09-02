@@ -1063,3 +1063,120 @@ addInvoiceRow(
 renderCompanies();
 
 renderProducts();
+/* Invoice Summary Fix */
+
+.invoice-summary {
+  margin-top: 14px;
+  border-top: 1px solid #ffffff12;
+  padding-top: 8px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff0b;
+  font-size: 12px;
+}
+
+.summary-row > span {
+  color: #b8c8da;
+}
+
+.summary-row strong {
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.summary-input {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  width: 180px;
+  margin: 0;
+  color: #91a6bd;
+}
+
+.summary-input > span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.summary-input input {
+  width: 140px;
+  margin: 0;
+  text-align: right;
+}
+
+.summary-row.payable {
+  padding-top: 14px;
+  border-top: 1px solid #ffffff18;
+  margin-top: 4px;
+}
+
+.summary-row.payable strong {
+  font-size: 20px;
+}
+
+.due-row {
+  border-bottom: 0;
+  padding-bottom: 2px;
+}
+
+.due-row strong {
+  color: #ff91a9;
+  font-size: 20px;
+}
+
+.invoice-grand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.invoice-grand strong {
+  font-size: 21px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 520px) {
+
+  .summary-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .summary-row > span {
+    flex: 1;
+  }
+
+  .summary-input {
+    width: 145px;
+    flex-shrink: 0;
+  }
+
+  .summary-input input {
+    width: 115px;
+    text-align: right;
+  }
+
+  .summary-row strong {
+    white-space: nowrap;
+  }
+
+  .invoice-grand {
+    gap: 6px;
+  }
+
+  .invoice-grand strong {
+    font-size: 18px;
+  }
+
+}
