@@ -1870,7 +1870,26 @@
 
 
 <script src="script.js?v=2"></script>
+<script>
+document.querySelectorAll('.about-more-btn').forEach(function(button) {
+  button.addEventListener('click', function() {
 
+    const card = button.closest('.about-focus-card');
+
+    if (!card) return;
+
+    const isOpen = card.classList.toggle('is-open');
+
+    button.setAttribute(
+      'aria-expanded',
+      isOpen ? 'true' : 'false'
+    );
+
+    button.childNodes[0].textContent =
+      isOpen ? 'সংক্ষেপে দেখুন ' : 'বিস্তারিত দেখুন ';
+  });
+});
+</script>
 
   <!-- =========================
        SOFTWARE ORDER LANGUAGE
