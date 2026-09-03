@@ -1283,3 +1283,251 @@ h2 span{
   object-fit:contain !important;
   border-radius:50%;
 }
+/* ABOUT M TECH */
+.about-mtech-section {
+  overflow: hidden;
+}
+
+.about-lead {
+  max-width: 760px;
+  margin: 18px auto 0;
+  line-height: 1.9;
+  opacity: 0.78;
+}
+
+.about-intro-box {
+  max-width: 920px;
+  margin: 34px auto 0;
+  padding: 26px 30px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.10);
+}
+
+.about-intro-box p {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.9;
+  opacity: 0.84;
+}
+/* ABOUT M TECH - CARDS */
+.about-focus-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin-top:24px;
+}
+
+.about-focus-card{
+  position:relative;
+  padding:24px 22px 20px;
+  border-radius:18px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,0.045),
+    rgba(255,255,255,0.02)
+  );
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 18px 50px rgba(0,0,0,0.10);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-focus-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(80,160,255,0.28);
+  box-shadow:0 22px 60px rgba(0,0,0,0.16);
+}
+
+.about-focus-number{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  opacity:0.65;
+}
+
+.about-focus-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  margin:14px 0;
+  border-radius:12px;
+  background:rgba(80,160,255,0.10);
+  border:1px solid rgba(80,160,255,0.18);
+  font-size:20px;
+}
+
+.about-focus-tag{
+  display:block;
+  margin-bottom:8px;
+  font-size:10px;
+  letter-spacing:0.12em;
+  opacity:0.55;
+}
+
+.about-focus-card h3{
+  margin:0 0 9px;
+  font-size:18px;
+  line-height:1.35;
+}
+
+.about-focus-card > p{
+  margin:0;
+  font-size:13px;
+  line-height:1.75;
+  opacity:0.75;
+}
+
+/* ABOUT DETAILS */
+.about-detail{
+  display:none;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+
+.about-detail p{
+  margin:0;
+  font-size:12px;
+  line-height:1.75;
+  opacity:0.72;
+}
+
+.about-focus-card.is-open .about-detail{
+  display:block;
+}
+
+/* DETAILS BUTTON */
+.about-more-btn{
+  margin-top:15px;
+  padding:0;
+  border:0;
+  background:none;
+  color:#8dc0ff;
+  font:inherit;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.about-more-btn span{
+  display:inline-block;
+  margin-left:5px;
+  transition:transform 0.2s ease;
+}
+
+.about-focus-card.is-open .about-more-btn span{
+  transform:rotate(45deg);
+}
+
+/* ABOUT VISION */
+.about-vision-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:20px;
+}
+
+.about-vision-card{
+  padding:22px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+}
+
+.about-vision-card h3{
+  margin:8px 0 8px;
+  font-size:17px;
+  line-height:1.4;
+}
+
+.about-vision-card p{
+  margin:0;
+  font-size:13px;
+  line-height:1.8;
+  opacity:0.74;
+}
+
+/* FINAL VISION */
+.about-vision-statement{
+  max-width:900px;
+  margin:20px auto 0;
+  padding:22px 24px;
+  text-align:center;
+  border-radius:18px;
+  background:linear-gradient(
+    135deg,
+    rgba(80,160,255,0.08),
+    rgba(255,255,255,0.025)
+  );
+  border:1px solid rgba(80,160,255,0.14);
+}
+
+.about-vision-statement span{
+  display:block;
+  margin-bottom:8px;
+  font-size:10px;
+  letter-spacing:0.14em;
+  color:#8dc0ff;
+}
+
+.about-vision-statement strong{
+  display:block;
+  font-size:15px;
+  line-height:1.65;
+}
+
+/* ABOUT MOBILE */
+@media (max-width:768px){
+
+  .about-lead{
+    font-size:13px;
+    line-height:1.8;
+  }
+
+  .about-intro-box{
+    margin-top:22px;
+    padding:20px 18px;
+  }
+
+  .about-intro-box p{
+    font-size:13px;
+    line-height:1.8;
+  }
+
+  .about-focus-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-top:20px;
+  }
+
+  .about-focus-card{
+    padding:20px 18px;
+  }
+
+  .about-focus-card h3{
+    font-size:17px;
+  }
+
+  .about-vision-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .about-vision-card{
+    padding:20px 18px;
+  }
+
+  .about-vision-statement{
+    padding:20px 18px;
+  }
+
+  .about-vision-statement strong{
+    font-size:14px;
+  }
+
+}
