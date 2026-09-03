@@ -244,18 +244,34 @@
       opacity: 0.88;
     }
 
-    .order-points span {
-      flex: 0 0 24px;
-      width: 24px;
-      height: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      font-size: 12px;
-    }
+    .order-points div {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.88;
+}
 
+.order-points div > span:first-child {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  font-size: 12px;
+}
+
+.order-points div > span:last-child {
+  flex: 1;
+  min-width: 0;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
 
     /* FORM */
 
