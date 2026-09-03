@@ -1531,3 +1531,24 @@ h2 span{
   }
 
 }
+/* SOLUTIONS - BALANCED 2x2 LAYOUT */
+
+.solutions-section > .container > .solution-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.solutions-section > .container > .solution-grid .solution-card {
+  min-height: 190px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .solutions-section > .container > .solution-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solutions-section > .container > .solution-grid .solution-card {
+    min-height: auto;
+  }
+}
